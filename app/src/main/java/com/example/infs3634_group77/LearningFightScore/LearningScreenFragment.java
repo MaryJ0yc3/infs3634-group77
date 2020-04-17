@@ -1,4 +1,4 @@
-package com.example.infs3634_group77;
+package com.example.infs3634_group77.LearningFightScore;
 
 import android.os.Bundle;
 
@@ -8,13 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.infs3634_group77.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FightScreenFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FightScreenFragment extends Fragment {
+
+public class LearningScreenFragment extends Fragment {
+
+    //has recycler view with words (using word adapter to blow up).
+    // call from category object which has hardcoded words.
+//    words object must call using service
+    //need to
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -24,7 +27,7 @@ public class FightScreenFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FightScreenFragment() {
+    public LearningScreenFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +37,11 @@ public class FightScreenFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FightScreenFragment.
+     * @return A new instance of fragment LearningScreenFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FightScreenFragment newInstance(String param1, String param2) {
-        FightScreenFragment fragment = new FightScreenFragment();
+    public static LearningScreenFragment newInstance(String param1, String param2) {
+        LearningScreenFragment fragment = new LearningScreenFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +62,6 @@ public class FightScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fight_screen, container, false);
+        return inflater.inflate(R.layout.fragment_learning_screen, container, false);
     }
 }
