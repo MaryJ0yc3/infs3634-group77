@@ -17,11 +17,6 @@ public class HomeScreenFragment extends Fragment {
 
     //has nice visuals in the bg
     //has help button that goes to tutorial
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public HomeScreenFragment() {
         // Required empty public constructor
     }
