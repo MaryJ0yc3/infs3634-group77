@@ -6,6 +6,11 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Just here to look pretty and give impression
+    //Just has 'start' button and nice graphic behind with logo.
+    //can add progress bar?
+    //Joyce might add animations later
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
