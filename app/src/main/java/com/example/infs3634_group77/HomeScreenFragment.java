@@ -17,9 +17,7 @@ public class HomeScreenFragment extends Fragment {
 
     //has nice visuals in the bg
     //has help button that goes to tutorial
-    public HomeScreenFragment() {
-        // Required empty public constructor
-    }
+    public HomeScreenFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

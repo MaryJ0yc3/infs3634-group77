@@ -1,4 +1,4 @@
-package com.example.infs3634_group77.LearningFightScore;
+package com.example.infs3634_group77;
 
 import android.os.Bundle;
 
@@ -8,13 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.infs3634_group77.R;
+
+public class LearningScreenFragment extends Fragment {
+
+    //has recycler view with words (using word adapter to blow up).
+    // call from category object which has hardcoded words.
+//    words object must call using service
+    //need to
 
 
-public class ScoreScreenFragment extends Fragment {
-
-
-    public ScoreScreenFragment() { }
+    public LearningScreenFragment() {}
 
 
 
@@ -22,6 +25,7 @@ public class ScoreScreenFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+//
         }
     }
 
@@ -29,6 +33,6 @@ public class ScoreScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_score_screen, container, false);
+        return inflater.inflate(R.layout.fragment_learning_screen, container, false);
     }
 }

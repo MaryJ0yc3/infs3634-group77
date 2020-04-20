@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.infs3634_group77.LearningFightScore.LearningScreenFragment;
 import com.example.infs3634_group77.Settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
