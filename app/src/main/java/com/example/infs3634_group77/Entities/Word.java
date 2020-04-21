@@ -19,6 +19,18 @@ public class Word {
         this.wordImageUrl = wordImageUrl;
     }
 
+    public String getWord() {return word;}
+
+    public void setWord(String word) { this.word = word;}
+
+    public String getDefinition() { return definition; }
+
+    public void setDefinition(String definition) { this.definition = definition;}
+
+    public String getWordImageUrl() {return wordImageUrl;}
+
+    public void setWordImageUrl(String wordImageUrl) { this.wordImageUrl = wordImageUrl;}
+
     public static ArrayList<Word> getDummyWordList(){
         ArrayList<Word> dummyWords= new ArrayList<>();
         dummyWords.add(new Word("word1", "definition1",

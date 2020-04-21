@@ -23,8 +23,6 @@ import java.util.ArrayList;
 
 
 public class HomeScreenFragment extends Fragment {
-    //has category recycler view horizontal. if lazy just do buttons but
-    // can get marked down coz it limits the cards we can add later
 
     //has nice visuals in the bg
     //has help button that goes to tutorial
@@ -65,8 +63,8 @@ public class HomeScreenFragment extends Fragment {
         CategoryAdapter.RecyclerViewClickListener listener = new CategoryAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Log.d(TAG, "on createView: lister onClick: starting");
-//                launchWordListFragment(position);
+                Log.d(TAG, "onClick: starting");
+                launchWordListFragment(position);
             }
 
         };
@@ -90,15 +88,18 @@ public class HomeScreenFragment extends Fragment {
 
     }
 
-//    private void launchWordListFragment(int position){
-//        FragmentManager manager = getParentFragmentManager();
-//        FragmentTransaction transaction = manager.beginTransaction();
-//        Fragment wordListFragment= new WordListFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("position", position);
-//        wordListFragment.setArguments((bundle));
-//        transaction.replace(android.R.id.content, wordListFragment);
-//        transaction.commit();
-//    }
+    //sends over the position in a bundle to word list fragment
+    private void launchWordListFragment(int position){
+        Log.d(TAG, "launchWordListFragment: starting");
+        FragmentManager manager = getParentFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        Fragment wordListFragment= new WordListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", position);
+        wordListFragment.setArguments((bundle));
+        transaction.replace(android.R.id.content, wordListFragment);
+        transaction.commit();
+        Log.d(TAG, "launchWordListFragment: finish");
+    }
 
 }
