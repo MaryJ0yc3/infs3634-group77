@@ -1,5 +1,6 @@
 package com.example.infs3634_group77.Helpers;
 
+import android.media.Image;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,57 +17,70 @@ import com.example.infs3634_group77.R;
 
 import org.w3c.dom.Text;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
-    private String[] mDataset;
+import java.util.ArrayList;
 
-    // Constructor
-    public CategoryAdapter(String[] dataSet) {
-        mDataset = dataSet;
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+
+    private ArrayList<Category> mCategories;
+    private RecyclerViewClickListener mListener;
+
+    public CategoryAdapter(){}
+
+    //constructor
+    public CategoryAdapter(ArrayList<Category> categories, RecyclerViewClickListener listener) {
+        mCategories = categories;
+        mListener = listener;
     }
 
-    public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        // Creates the items on the layout
-        private TextView category;
-        public TextView score;
-        public ImageView icon;
-        public View view;
+    public interface RecyclerViewClickListener {
+        void onClick(View view, int position);
+    }
 
-        // Viewholder method to assign to xml widgets
-        public CategoryViewHolder(View v) {
+
+
+    public static class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        public TextView tvCategory, tvDesc;
+        public ImageView ivCategory;
+
+        private RecyclerViewClickListener mListener;
+
+        public CategoryViewHolder(View v, RecyclerViewClickListener listener){
             super(v);
-            view = v;
-            category = (TextView) v.findViewById(R.id.tvCategory);
-            score = (TextView) v.findViewById(R.id.tvScore);
-            icon = (ImageView) v.findViewById(R.id.ivCategory);
-        }
+            mListener = listener;
+            v.setOnClickListener(this);
+            tvCategory = v.findViewById(R.id.tvCategory);
+            tvDesc = v.findViewById(R.id.tvDesc);
+            ivCategory = v.findViewById(R.id.ivCategory);
 
-        // Method to replace items with desired data
-        public void bindView(int position) {
-            category.setText(mDataset[position]);
-            icon.setImageResource(CategoryData.picturePath[position]);
         }
 
         @Override
-        public void onClick(View v) {
-            // On click will go to the learning activity and populate recyclerview there with corresponding words
+        public void onClick(View view) {
+            mListener.onClick(view, getAdapterPosition());
         }
+
     }
 
     @Override
-    public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView v = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.home_row, parent, false);
-        CategoryViewHolder vh = new CategoryViewHolder(v);
-        return null;
+    public CategoryAdapter.CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_row, parent, false);
+        return new CategoryViewHolder(v, mListener);
     }
 
+    //set the holders depending on position
     @Override
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
-        
-
+        Category category = mCategories.get(position);
+        holder.tvCategory.setText(category.getCategoryName());
+        holder.tvDesc.setText(category.getDesc());
+        holder.ivCategory.setImageResource(category.getIcon());
     }
 
+    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mCategories.size();
     }
+
 }
