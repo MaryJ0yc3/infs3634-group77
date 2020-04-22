@@ -45,6 +45,5 @@ public class Word {
         dummyWords.add(new Word("word8", "definition8", null));
 
         return dummyWords;
-
     }
 }

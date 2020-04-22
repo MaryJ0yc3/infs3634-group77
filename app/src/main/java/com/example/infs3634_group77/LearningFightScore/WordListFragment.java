@@ -40,7 +40,6 @@ public class WordListFragment extends Fragment {
         Log.d(TAG, "on createView: finished inflating");
 
         RecyclerView mRecyclerView = v.findViewById(R.id.rvWordListPreLearning);
-
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
