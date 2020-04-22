@@ -9,45 +9,42 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWordListPreLearning"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="90dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/exitBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wordListInstructions" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:text="START"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvWordListPreLearning" />
+        app:layout_constraintTop_toTopOf="@+id/exitBtn" />
 
     <Button
         android:id="@+id/exitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="196dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="2dp"
         android:text="EXIT"
-        app:layout_constraintEnd_toStartOf="@+id/startBtn"
-        app:layout_constraintTop_toBottomOf="@+id/rvWordListPreLearning" />
+        app:layout_constraintBottom_toTopOf="@+id/wordListInstructions"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/wordListInstructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="13dp"
         android:text="Learn your words! Click start when you are ready."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

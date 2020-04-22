@@ -1,5 +1,6 @@
 package com.example.infs3634_group77;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -45,7 +46,6 @@ public class HomeScreenFragment extends Fragment {
         Log.d(TAG, "on createView: starting");
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home_screen, container, false);
-        Log.d(TAG, "on createView: finished inflating");
 
         // Making RecyclerView. need to use v. because we're inflating
         RecyclerView mRecyclerView = v.findViewById(R.id.rvHome);
@@ -58,12 +58,17 @@ public class HomeScreenFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         Log.d(TAG, "on createView: finished setting mRecyclerView as mLayoutManager");
 
-        // Change to word list fragment when clicked
+        // Change to word list fragment when clicked and bundles the position clicked
         CategoryAdapter.RecyclerViewClickListener listener = new CategoryAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
                 Log.d(TAG, "onClick: starting");
-                launchWordListFragment(position);
+                Fragment fragment = new WordListFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+                fragment.setArguments((bundle));
+                getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
+                Log.d(TAG, "launchWordListFragment: finish");
             }
 
         };
@@ -82,21 +87,6 @@ public class HomeScreenFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
-
-    }
-
-    //sends over the position in a bundle to word list fragment
-    private void launchWordListFragment(int position){
-        Log.d(TAG, "launchWordListFragment: starting");
-        FragmentManager manager = getParentFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        Fragment wordListFragment= new WordListFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("position", position);
-        wordListFragment.setArguments((bundle));
-        transaction.replace(android.R.id.content, wordListFragment);
-        transaction.commit();
-        Log.d(TAG, "launchWordListFragment: finish");
     }
 
 }
