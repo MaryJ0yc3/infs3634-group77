@@ -31,7 +31,7 @@ public class FightScreenFragment extends Fragment {
             // then press submit button recognises no words left, replace fragment with score screen
             // send through bundle.
 
-    
+
     public FightScreenFragment() { }
 
 
