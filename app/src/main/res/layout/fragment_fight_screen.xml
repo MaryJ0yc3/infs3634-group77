@@ -40,10 +40,10 @@
         android:layout_marginBottom="20dp"
         android:text="SKIP"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/submitBtn" />
+        app:layout_constraintEnd_toStartOf="@+id/startBtn" />
 
     <Button
-        android:id="@+id/submitBtn"
+        android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
