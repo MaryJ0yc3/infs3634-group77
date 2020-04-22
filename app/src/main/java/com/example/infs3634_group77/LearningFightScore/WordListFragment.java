@@ -28,7 +28,7 @@ public class WordListFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-
+    // Empty Constructor
     public WordListFragment (){}
 
     @Override
