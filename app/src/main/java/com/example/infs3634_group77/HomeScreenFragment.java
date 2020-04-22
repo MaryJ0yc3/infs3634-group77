@@ -36,8 +36,8 @@ public class HomeScreenFragment extends Fragment {
 
 
     public HomeScreenFragment() {
-    }
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,10 +47,9 @@ public class HomeScreenFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home_screen, container, false);
         Log.d(TAG, "on createView: finished inflating");
 
-        //find elements. need to use v. because we're inflating
+        // Making RecyclerView. need to use v. because we're inflating
         RecyclerView mRecyclerView = v.findViewById(R.id.rvHome);
         Log.d(TAG, "on createView: finished finding rvHome");
-
         mRecyclerView.setHasFixedSize(true);
         Log.d(TAG, "on createView: setHAsFixedSize true");
 
@@ -59,7 +58,7 @@ public class HomeScreenFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         Log.d(TAG, "on createView: finished setting mRecyclerView as mLayoutManager");
 
-
+        // Change to word list fragment when clicked
         CategoryAdapter.RecyclerViewClickListener listener = new CategoryAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -76,8 +75,6 @@ public class HomeScreenFragment extends Fragment {
 
         Log.d(TAG, "on createView: starting return v");
         return v;
-
-
     }
 
     @Override

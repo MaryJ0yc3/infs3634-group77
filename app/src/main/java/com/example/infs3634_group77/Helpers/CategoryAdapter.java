@@ -36,8 +36,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         void onClick(View view, int position);
     }
 
-
-
     public static class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView tvCategory, tvDesc;
@@ -68,7 +66,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return new CategoryViewHolder(v, mListener);
     }
 
-    //set the holders depending on position
+    // Set the holders depending on position
     @Override
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
         Category category = mCategories.get(position);
@@ -77,7 +75,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.ivCategory.setImageResource(category.getIcon());
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+    // Return the size of your data set (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mCategories.size();

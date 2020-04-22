@@ -9,15 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class LearningScreenFragment extends Fragment {
+public class DictionaryScreenFragment extends Fragment {
 
-    //has recycler view with words (using word adapter to blow up).
-    // call from category object which has hardcoded words.
-//    words object must call using service
-    //need to
+    // Dictionary search page which allows users to search for a word from the api and get a result
 
 
-    public LearningScreenFragment() {}
+    public DictionaryScreenFragment() {}
 
 
 

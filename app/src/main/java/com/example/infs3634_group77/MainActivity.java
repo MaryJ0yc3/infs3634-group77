@@ -31,17 +31,17 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeScreenFragment()).commit();
         }
 
+        // Code to change fragments depending on which menuItem is pressed
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment fragment = null;
-
                 switch (menuItem.getItemId()) {
                     case R.id.home:
                         fragment = new HomeScreenFragment();
                         break;
                     case R.id.search:
-                        fragment = new LearningScreenFragment();
+                        fragment = new DictionaryScreenFragment();
                         break;
                     case R.id.settings:
                         fragment = new SettingsFragment();
