@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.infs3634_group77.Entities.Category;
-import com.example.infs3634_group77.Entities.Word;
+import com.example.infs3634_group77.Entities.DefinitionResponse;
 import com.example.infs3634_group77.Settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Category category;
 
     // ArrayList of word and definitions as created from repeat API call from one category
-    ArrayList<Word> wordArrayList;
+    ArrayList<DefinitionResponse> wordArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

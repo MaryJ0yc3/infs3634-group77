@@ -4,6 +4,7 @@ import com.example.infs3634_group77.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Category {
 
@@ -39,13 +40,15 @@ public class Category {
 
     public void setWordList(ArrayList<String> words) {wordsList = words;}
 
+    public ArrayList<String> getWordList() {return wordsList;};
+
     public int getIcon() { return icon; }
 
     public void setIcon(int icon) {this.icon = icon;}
 
     //get categories method for the categories recycler view
-    public static ArrayList<Category> getCategories(){
-        ArrayList<Category> categories= new ArrayList<>();
+    public static List<Category> getCategories(){
+        List<Category> categories= new ArrayList<>();
         categories.add(new Category(
                 "University", "Key words needed to get by at University",
                 R.drawable.category_icon1, new ArrayList<String> (Arrays.asList(
@@ -71,5 +74,8 @@ public class Category {
         return categories;
     }
 
+    public static Category getCategory(int position) {
+        return getCategories().get(position);
+    }
 
 }

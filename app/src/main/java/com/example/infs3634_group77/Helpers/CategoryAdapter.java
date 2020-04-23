@@ -1,33 +1,28 @@
 package com.example.infs3634_group77.Helpers;
 
-import android.media.Image;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infs3634_group77.Entities.Category;
-import com.example.infs3634_group77.Entities.CategoryData;
 import com.example.infs3634_group77.R;
 
-import org.w3c.dom.Text;
+import java.util.List;
 
-import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
-    private ArrayList<Category> mCategories;
+    private List<Category> mCategories;
     private RecyclerViewClickListener mListener;
 
     public CategoryAdapter(){}
 
     //constructor
-    public CategoryAdapter(ArrayList<Category> categories, RecyclerViewClickListener listener) {
+    public CategoryAdapter(List<Category> categories, RecyclerViewClickListener listener) {
         mCategories = categories;
         mListener = listener;
     }
@@ -55,6 +50,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         @Override
         public void onClick(View view) {
+            // Pass the category
             mListener.onClick(view, getAdapterPosition());
         }
 

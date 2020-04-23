@@ -22,6 +22,17 @@ public class Definition {
     @Expose
     private Object emoji;
 
+    // Don't know if need to set word within the Definition yet
+    /*private String word;
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }*/
+
     public String getType() {
         return type;
     }

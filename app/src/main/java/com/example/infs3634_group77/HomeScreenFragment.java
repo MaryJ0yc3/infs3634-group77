@@ -1,12 +1,9 @@
 package com.example.infs3634_group77;
 
-import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,11 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.infs3634_group77.Entities.Category;
-import com.example.infs3634_group77.Entities.Word;
+import com.example.infs3634_group77.Entities.Definition;
+import com.example.infs3634_group77.Entities.DefinitionResponse;
 import com.example.infs3634_group77.Helpers.CategoryAdapter;
+import com.example.infs3634_group77.Helpers.DefinitionService;
 import com.example.infs3634_group77.LearningFightScore.WordListFragment;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class HomeScreenFragment extends Fragment {
@@ -88,5 +93,4 @@ public class HomeScreenFragment extends Fragment {
         if (getArguments() != null) {
         }
     }
-
 }

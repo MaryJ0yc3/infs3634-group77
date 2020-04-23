@@ -5,8 +5,8 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-// Gets a Word object from the JSON object
-public class Word {
+// Gets a DefinitionResponse object from the JSON object
+public class DefinitionResponse {
 
     @SerializedName("definitions")
     @Expose
@@ -17,6 +17,16 @@ public class Word {
     @SerializedName("pronunciation")
     @Expose
     private String pronunciation;
+    // Definition that will store the first Definition to show in WordListFragment for learning
+    private String firstDefinition;
+
+    public String getFirstDefinition() {
+        return firstDefinition;
+    }
+
+    public void setFirstDefinition(String definition) {
+        firstDefinition = definition;
+    }
 
     public List<Definition> getDefinitions() {
         return definitions;
@@ -41,4 +51,5 @@ public class Word {
     public void setPronunciation(String pronunciation) {
         this.pronunciation = pronunciation;
     }
+
 }
