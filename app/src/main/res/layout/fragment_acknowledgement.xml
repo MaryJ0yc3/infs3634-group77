@@ -5,10 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".Settings.AcknowledgementFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/about"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/copyright_2020_we_the_developers_of_this_software_application_declare_that_it_is_our_work_towards_an_assessment_item_submitted_to_fulfil_the_requirements_of_infs3634_unsw_sydney_we_declare_that_it_is_our_own_work_except_where_acknowledged_and_has_not_been_submitted_for_academic_credit_elsewhere_we_acknowledge_that_the_assessor_of_this_item_may_for_the_purpose_of_assessing_this_item_reproduce_this_assessment_item_and_provide_a_copy_to_another_member_of_the_university_and_or_communicate_a_copy_of_this_assessment_item_to_a_plagiarism_checking_service_which_may_then_retain_a_copy_of_the_assessment_item_on_its_database_for_the_purpose_of_future_plagiarism_checking_we_certify_that_we_have_read_and_understood_the_unsw_university_rules_in_respect_of_student_academic_misconduct" />
+
+    <Button
+        android:id="@+id/backbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:text="@string/OK" />
 
 </FrameLayout>
