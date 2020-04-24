@@ -44,7 +44,7 @@ public class SettingsFragment extends Fragment {
             Fragment fragment = new AcknowledgementFragment();
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.acknowledgement_frame, fragment);
+            fragmentTransaction.replace(R.id.fragmentContainer, fragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
