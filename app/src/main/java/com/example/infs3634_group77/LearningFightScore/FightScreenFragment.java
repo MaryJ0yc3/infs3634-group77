@@ -8,15 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.infs3634_group77.Entities.Definition;
-import com.example.infs3634_group77.Entities.DefinitionResponse;
 import com.example.infs3634_group77.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class FightScreenFragment extends Fragment {
-    List<DefinitionResponse> mWordsList;
+    List<String> mWordsList;
 
     //PSEUDOCODE
 
@@ -54,7 +53,7 @@ public class FightScreenFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_fight_screen, container, false);
     }
 
-    public void setWords(List<DefinitionResponse> words) {
+    public void setWords(ArrayList<String> words) {
         if (mWordsList != null) {
             mWordsList.clear();
         }
