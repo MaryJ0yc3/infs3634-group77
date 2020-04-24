@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.infs3634_group77.Entities.DefinitionResponse;
 import com.example.infs3634_group77.Helpers.DefinitionService;
 import com.example.infs3634_group77.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,10 +30,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FightScreenFragment extends Fragment {
     public static final String EXTRA_MESSAGE = "com.example.infs3634_group77.MESSAGE";
     private static final String TAG = "FightScreenFragment";
+    private String answerInput;
     private String word;
     private String definition;
-    private String pronunciation;
-    ArrayList<String> questionWords;
+    private ArrayList<String> questionWords;
+    private TextView question;
+    private Button submit;
+    private Button skip;
+    private TextInputLayout til_answer;
+
 
     //PSEUDOCODE
 
@@ -81,7 +87,9 @@ public class FightScreenFragment extends Fragment {
         TextView question = v.findViewById(R.id.tvQuestion);
         Button submit = v.findViewById(R.id.submitBtn);
         Button skip = v.findViewById(R.id.skipBtn);
+        TextInputLayout til_answer = v.findViewById(R.id.til_answer);
 
+        //score screen bundle components
 
 
 
@@ -89,6 +97,23 @@ public class FightScreenFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean checkValidity = validateAnswer();
+                if(checkValidity == true){
+                    answerInput = til_answer.getEditText().getText().toString().trim();
+                    if(answerInput.equals(word)){
+                        //if word is correct, put in correct Array list
+                        //populate image view animation for 3 seconds then fade
+                    }else{
+                        //if word is incorrect, append incorrect spelling to word
+                        // then put in wrong Array list
+                        //populate image view animation for 3 seconds then fade
+                    }
+                }
+
+                //populate the next question
+                //if end of the cycle, go to skip array
+                //if end of skip array or skip array is empty, go to score screen
+                //set animation to score screen if time
 
             }
         });
@@ -96,11 +121,27 @@ public class FightScreenFragment extends Fragment {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //add to Skip array
 
             }
         });
 
         return v;
+    }
+
+    private boolean validateAnswer(){
+        answerInput = til_answer.getEditText().getText().toString().trim();
+
+        if(answerInput.isEmpty()){
+            til_answer.setError("Aww, let's not submit an empty answer! Skip if you're unsure.");
+            return false;
+        }else if (answerInput.length() > 20) {
+            til_answer.setError("Looks like your answer is too long...");
+            return false;
+        }else{
+            til_answer.setError(null);
+            return true;
+        }
     }
 
 
@@ -135,13 +176,11 @@ public class FightScreenFragment extends Fragment {
         protected void onPostExecute(DefinitionResponse word) {
             // Add to the definitions List in WordListFragment instead so can pass it on to FightScreen
             Log.d(TAG, "onPostExecute: new DefinitionResponse word is: "
-                    + word.getWord()
-                    + ", The definition is: "
-                    + word.getFirstDefinition());
+                    + word.getWord());
             definition = word.getDefinitions().get(0).getDefinition();
             View v = getView();
-            ((TextView) v.findViewById(R.id.tvQuestion)).setText("What does this mean: "
-                    + definition);
+            ((TextView) v.findViewById(R.id.tvQuestion)).setText("What word means \""
+                    + definition + "\"");
             // Can also call for example, and image
             Log.d(TAG, "onPostExecute: Added new DefinitionResponse");
         }
