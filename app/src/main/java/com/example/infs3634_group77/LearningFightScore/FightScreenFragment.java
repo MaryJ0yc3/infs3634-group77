@@ -1,20 +1,35 @@
 package com.example.infs3634_group77.LearningFightScore;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.infs3634_group77.Entities.DefinitionResponse;
+import com.example.infs3634_group77.Helpers.DefinitionService;
 import com.example.infs3634_group77.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class FightScreenFragment extends Fragment {
+    private String TAG = "WordDetailFragment";
+    private String word;
+    private String definition;
+    private String pronunciation;
     List<String> mWordsList;
 
     //PSEUDOCODE
@@ -42,6 +57,8 @@ public class FightScreenFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            Bundle bundle = getArguments();
+            ArrayList<String> questionWords = bundle.getStringArrayList("category words");
 
         }
     }
@@ -50,13 +67,50 @@ public class FightScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fight_screen, container, false);
+        View v = inflater.inflate(R.layout.fragment_fight_screen, container, false);
+
+        //
+        ((TextView) v.findViewById(R.id.tvQuestion)).setText("What word means: " + definition);
+        return v;
     }
 
-    public void setWords(ArrayList<String> words) {
-        if (mWordsList != null) {
-            mWordsList.clear();
+
+
+
+    // Auth Token 14bffab1e7b99dd69186fac5837139842c67aab5
+    private class GetDefinitionTask extends AsyncTask<Void, Void, DefinitionResponse> {
+        String authToken = ("Token 14bffab1e7b99dd69186fac5837139842c67aab5");
+        @Override
+        protected DefinitionResponse doInBackground(Void... voids) {
+            Log.d(TAG, "doInBackground: Start");
+            try {
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://owlbot.info/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                DefinitionService service = retrofit.create(DefinitionService.class);
+                Call<DefinitionResponse> call = service.getDefinitions(word, authToken);
+                Log.d(TAG, "doInBackground: getDefinitions finished");
+                Response<DefinitionResponse> definitionResponse = call.execute();
+                Log.d(TAG, "doInBackground: definitionResponse execute");
+                DefinitionResponse wordDetail = definitionResponse.body();
+                // Currently only calls API once for the first word in the list
+                return wordDetail;
+            } catch (IOException e) {
+                Log.d(TAG, "doInBackground: API call failed");
+                e.printStackTrace();
+                return null;
+            }
         }
-        mWordsList.addAll(words);
+
+        @Override
+        protected void onPostExecute(DefinitionResponse word) {
+            // Add to the definitions List in WordListFragment instead so can pass it on to FightScreen
+            Log.d(TAG, "onPostExecute: new DefinitionResponse word is: " + word.getWord() + ", The definition is: " + word.getFirstDefinition());
+            definition = word.getDefinitions().get(0).getDefinition();
+            // Can also call for example, and image
+            Log.d(TAG, "onPostExecute: Added new DefinitionResponse");
+        }
     }
+
 }
