@@ -27,10 +27,11 @@ public class SettingsFragment extends Fragment {
 
     // TODO: Rename and change types and number of parameters
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+        }
     }
 
     @Override
@@ -40,13 +41,12 @@ public class SettingsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
 
         Button button  = v.findViewById(R.id.aboutbtn);
-        button.setOnClickListener(view -> {
-            Fragment fragment = new AcknowledgementFragment();
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentContainer, fragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new AcknowledgementFragment();
+                getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
+            }
         });
 
         String [] values =
