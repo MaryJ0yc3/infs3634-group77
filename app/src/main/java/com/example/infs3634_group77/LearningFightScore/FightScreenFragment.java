@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.infs3634_group77.Entities.DefinitionResponse;
@@ -26,17 +27,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class FightScreenFragment extends Fragment {
-    private String TAG = "WordDetailFragment";
+    public static final String EXTRA_MESSAGE = "com.example.infs3634_group77.MESSAGE";
+    private static final String TAG = "FightScreenFragment";
     private String word;
     private String definition;
     private String pronunciation;
-    List<String> mWordsList;
+    ArrayList<String> questionWords;
 
     //PSEUDOCODE
 
     //press START button in wordlist fragment and replace with this fragment
-    //bundle the word list and send to fightscreen
-    //cycle through array list and populate question textview with the definition of each word
+    //bundle the word list and send to fightscreen DONE
+    //cycle through String array list and execute Async Task each time to get question
+                // populate question textview with the definition of each word
     //optional image view (if null url, set not visible?)
     //use tab layout to insert answer. Once finished typing, hit submit (has if else statements)
     //Each time it's correct, HP of monster goes down, add to "correctWords" array list
@@ -58,7 +61,12 @@ public class FightScreenFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             Bundle bundle = getArguments();
-            ArrayList<String> questionWords = bundle.getStringArrayList("category words");
+            questionWords = bundle.getStringArrayList("category words");
+            //populate with first question
+            word = questionWords.get(0);
+
+            //Async task execute
+            new FightScreenFragment.GetDefinitionTask().execute();
 
         }
     }
@@ -69,11 +77,31 @@ public class FightScreenFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_fight_screen, container, false);
 
-        //
-        ((TextView) v.findViewById(R.id.tvQuestion)).setText("What word means: " + definition);
+        //elements
+        TextView question = v.findViewById(R.id.tvQuestion);
+        Button submit = v.findViewById(R.id.submitBtn);
+        Button skip = v.findViewById(R.id.skipBtn);
+
+
+
+
+        //set onClick listener for submit
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return v;
     }
-
 
 
 
@@ -106,8 +134,14 @@ public class FightScreenFragment extends Fragment {
         @Override
         protected void onPostExecute(DefinitionResponse word) {
             // Add to the definitions List in WordListFragment instead so can pass it on to FightScreen
-            Log.d(TAG, "onPostExecute: new DefinitionResponse word is: " + word.getWord() + ", The definition is: " + word.getFirstDefinition());
+            Log.d(TAG, "onPostExecute: new DefinitionResponse word is: "
+                    + word.getWord()
+                    + ", The definition is: "
+                    + word.getFirstDefinition());
             definition = word.getDefinitions().get(0).getDefinition();
+            View v = getView();
+            ((TextView) v.findViewById(R.id.tvQuestion)).setText("What does this mean: "
+                    + definition);
             // Can also call for example, and image
             Log.d(TAG, "onPostExecute: Added new DefinitionResponse");
         }

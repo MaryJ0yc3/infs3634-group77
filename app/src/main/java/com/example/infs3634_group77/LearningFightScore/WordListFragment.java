@@ -61,7 +61,7 @@ public class WordListFragment extends Fragment {
                 Log.d(TAG, "onClick: starting");
                 Fragment fragment = new WordDetailFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("position", position);
+//                bundle.putInt("position", position);
                 bundle.putString("word", mCategoryWords.get(position));
                 fragment.setArguments((bundle));
                 getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
