@@ -31,14 +31,11 @@ public class AcknowledgementFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_acknowledgement, container, false);
 
         Button button  = v.findViewById(R.id.backbtn);
-        button.setOnClickListener(view -> {
+        button.setOnClickListener(v1 -> {
             Fragment fragment = new SettingsFragment();
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.settings_frame, fragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
         });
+
         return v;
     }
 }
