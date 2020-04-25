@@ -61,7 +61,7 @@ public class WordListFragment extends Fragment {
                 Log.d(TAG, "onClick: starting");
                 Fragment fragment = new WordDetailFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("position", position);
+//                bundle.putInt("position", position);
                 bundle.putString("word", mCategoryWords.get(position));
                 fragment.setArguments((bundle));
                 getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
@@ -88,7 +88,9 @@ public class WordListFragment extends Fragment {
             public void onClick(View v) {
                 Log.d(TAG, "onClick: Start Fight Button");
                 Fragment fragment = new FightScreenFragment();
-                ((FightScreenFragment) fragment).setWords(mCategoryWords);
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("category words", mCategoryWords);
+                fragment.setArguments((bundle));
                 getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
             }
         });

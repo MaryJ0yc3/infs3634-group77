@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.example.infs3634_group77.Entities.Category;
 import com.example.infs3634_group77.Entities.DefinitionResponse;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         // initialising bottom navigation
         bottomNavigationView = findViewById(R.id.bottomNav);
 
+
         //Navigation straight to home screen if previously haven't used app
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeScreenFragment()).commit();
@@ -59,5 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        //softkeyboard layout changes
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 }
