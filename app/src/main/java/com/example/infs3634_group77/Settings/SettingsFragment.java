@@ -20,7 +20,7 @@ import java.util.Objects;
 
 
 public class SettingsFragment extends Fragment {
-
+    //Adding text so its pushable
     //has text field with dummy data profile name
 
     public SettingsFragment() { }
