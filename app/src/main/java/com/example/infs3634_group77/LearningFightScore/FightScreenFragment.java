@@ -102,6 +102,9 @@ public class FightScreenFragment extends Fragment {
         EditText editText_answer = v.findViewById(R.id.editText_answer);
         Button help = v.findViewById(R.id.help);
 
+        int originalQListSize = questionWords.size();
+
+
 
         //score screen bundle components
 
@@ -148,6 +151,9 @@ public class FightScreenFragment extends Fragment {
                             Toast.LENGTH_LONG).show();
                 }
 
+
+
+                //populate question tv with next word
                 if(counter < questionWords.size() - 1){
                     Log.d(TAG, "submit onClick: counter is at element no. "
                             + counter
@@ -159,13 +165,33 @@ public class FightScreenFragment extends Fragment {
                     Log.d(TAG, "submit onClick: new word is " + word);
                     //populate the next question
                     new FightScreenFragment.GetDefinitionTask().execute();
+                    //clear editText
+                    editText_answer.setText("");
                 } else if (counter == questionWords.size()- 1){
-                    Log.d(TAG, "submit onClick: reached the final element in questionWords array");
+                    Log.d(TAG, "submit onClick: no more elements left in questionWords array");
+                    if(tempSkipWords.size()==0){
+                        for(int i = 0; i < tempSkipWords.size() - 1; i++){
+                            //add all skip words to questionWords
+                            Log.d(TAG, "submit onClick: adding to questionWords " + tempSkipWords.get(i));
+                            questionWords.add(tempSkipWords.get(i));
+                            Log.d(TAG, "submit onClick: finished add to questionWords " + tempSkipWords.get(i));
+                            //delete all from Skip words
+                        }
+
+                    }else{
+                        //launch result screen
+                        Log.d(TAG, "final submit Click: open Fight Button");
+                        Fragment fragment = new ScoreScreenFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putStringArrayList("correct words", correctWords);
+                        bundle.putStringArrayList("incorrect words", incorrectWords);
+                        bundle.putStringArrayList("final skip words", incorrectWords);
+                        fragment.setArguments((bundle));
+                        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
+
+                    }
                 }
 
-
-                //if end of the cycle, go to skip array
-                //if end of skip array or skip array is empty, go to score screen
                 //set animation to score screen if time
 
             }
@@ -174,8 +200,36 @@ public class FightScreenFragment extends Fragment {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //add to Skip array
-
+                if (counter < originalQListSize - 1 ){
+                    tempSkipWords.add(word);
+                    //tempSkipWords will be added to questionWords array original questions are cycled through
+                    Log.d(TAG, "skip onClick: counter is at element no. "
+                            + counter
+                            + "/"
+                            + questionWords.size());
+                    counter ++;
+                    Log.d(TAG, "skip onClick: update counter to " + counter);
+                    word = questionWords.get(counter);
+                    Log.d(TAG, "skip onClick: new word is " + word);
+                    //populate the next question
+                    new FightScreenFragment.GetDefinitionTask().execute();
+                    //clear editText
+                    editText_answer.setText("");
+                    Log.d(TAG, "skip onClick: successfully skipped");
+                } else if (counter == questionWords.size() - 1) {
+                    //no more words left to skip
+                    Log.d(TAG, "skip onClick: no more elements left in questionWords array");
+                    Fragment fragment = new ScoreScreenFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putStringArrayList("correct words", correctWords);
+                    bundle.putStringArrayList("incorrect words", incorrectWords);
+                    bundle.putStringArrayList("final skip words", incorrectWords);
+                    fragment.setArguments((bundle));
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
+                } else{
+                    finalSkipWords.add(word);
+                    //finalSkipWords to be displayed in score screen
+                }
             }
         });
 
