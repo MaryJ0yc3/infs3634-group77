@@ -52,9 +52,9 @@ public class SettingsFragment extends Fragment {
         String [] values =
                 {"Select Language","English","Japanese","Spanish"};
         Spinner spinner = v.findViewById(R.id.languages);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.requireActivity(), android.R.layout.simple_spinner_item, values);
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        spinner.setAdapter(adapter);
+        ArrayAdapter<CharSequence> mSortAdapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_item, values);
+        mSortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(mSortAdapter);
 
         return v;
     }

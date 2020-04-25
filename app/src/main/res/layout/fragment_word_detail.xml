@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/tvDefinition"
-        android:layout_width="337dp"
+        android:layout_width="355dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -20,20 +20,19 @@
         android:id="@+id/ivDefinition"
         android:layout_width="160dp"
         android:layout_height="155dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnBack"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvWord"
-        android:layout_width="wrap_content"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:text="Word:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        app:layout_constraintBottom_toTopOf="@+id/ivDefinition"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/holo_purple"
+        app:layout_constraintBottom_toBottomOf="@+id/ivDefinition"
         app:layout_constraintStart_toStartOf="@+id/textView4" />
 
     <TextView
@@ -44,13 +43,13 @@
         android:text="Definition:"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="@+id/tvDefinition"
-        app:layout_constraintTop_toBottomOf="@+id/ivDefinition" />
+        app:layout_constraintTop_toBottomOf="@+id/tvWord" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="148dp"
+        android:layout_marginBottom="184dp"
         android:text="Example:"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +57,7 @@
 
     <TextView
         android:id="@+id/tvExample"
-        android:layout_width="337dp"
+        android:layout_width="355dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
