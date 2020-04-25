@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.infs3634_group77.Entities.DefinitionResponse;
 import com.example.infs3634_group77.Helpers.DefinitionService;
@@ -39,6 +40,7 @@ public class FightScreenFragment extends Fragment {
     private String word;
     private String definition;
     private ArrayList<String> questionWords;
+    private int counter = 0;
     private TextView question;
     private Button submit;
     private Button skip;
@@ -46,18 +48,21 @@ public class FightScreenFragment extends Fragment {
     private TextInputLayout til_answer;
     private EditText editText_answer;
 
+    //bundle Arraylists
+    private ArrayList<String> correctWords = new ArrayList<>();
+    private ArrayList<String> incorrectWords = new ArrayList<>();
+    private ArrayList<String> tempSkipWords = new ArrayList<>();
+    private ArrayList<String> finalSkipWords = new ArrayList<>();
+
 
     //PSEUDOCODE
 
-    //press START button in wordlist fragment and replace with this fragment
-    //bundle the word list and send to fightscreen DONE
-    //cycle through String array list and execute Async Task each time to get question
-                // populate question textview with the definition of each word
+
     //optional image view (if null url, set not visible?)
     //use tab layout to insert answer. Once finished typing, hit submit (has if else statements)
-    //Each time it's correct, HP of monster goes down, add to "correctWords" array list
-    //Each time it's incorrect, lose one of three heart, add to "wrongWords" array list
-    //if they lose all three hearts, launch score screen and display array lists
+        //Each time it's correct,  add to "correctWords" array list, happy animation
+        //Each time it's incorrect, add to "wrongWords" array list, sad animation
+    //if they have three incorrect words, launch score screen and display array lists with results
     //If they hit skip button, word is added to "last chance Arraylist"
     //once finished array list, go to last chance arraylist and cycle through. move to appropriate word list according to result
     //If last word of wordList, submit button checks last chance arraylist..
@@ -77,7 +82,6 @@ public class FightScreenFragment extends Fragment {
             questionWords = bundle.getStringArrayList("category words");
             //populate with first question
             word = questionWords.get(0);
-
             //Async task execute
             new FightScreenFragment.GetDefinitionTask().execute();
 
@@ -103,30 +107,63 @@ public class FightScreenFragment extends Fragment {
 
 
 
-        //set onClick listener for submit
+        //set onClick listener for submit.
+        // 1) check validity and add to correct, incorrect or skip arraylist
+        // 2) populate the next question by using counter
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "submit onClick: start");
-                boolean checkValidity = validateAnswer(editText_answer);
+                answerInput = editText_answer.getText().toString().trim();
+                boolean checkValidity = validateAnswer(answerInput.toLowerCase());
+                Log.d(TAG, "submit onClick: is '" + answerInput + "' valid? " + checkValidity);
                 if(checkValidity == true){
-                    Log.d(TAG, "submit onClick: check validity start");
-                    answerInput = editText_answer.getText().toString().trim();
-                    Log.d(TAG, "submit onClick: answerInput succesfully created");
-                    if(answerInput.equals(word)){
-                        Log.d(TAG, "submit onClick: answerInput equals the current question word");
-                        //if word is correct, put in correct Array list
-                        //populate image view animation for 3 seconds then fade
+                    Log.d(TAG, "submit onClick: check if word is correct or incorrect");
+                    if(answerInput.equals(word.toLowerCase().trim())){
+                        Log.d(TAG, "submit onClick: Correct! "
+                                        + answerInput
+                                        + " equals "
+                                        + word);
+                        correctWords.add(word);
+                        Log.d(TAG, "submit onClick: " + word + " added to correctWords ArrayList");
+
+                        //todo populate image view animation for 3 seconds then fade
 
                     }else{
-                        Log.d(TAG, "submit onClick: answerInput is incorrect");
-                        //if word is incorrect, append incorrect spelling to word
-                        // then put in wrong Array list
-                        //populate image view animation for 3 seconds then fade
+                        Log.d(TAG, "submit onClick: incorrect! "
+                                + answerInput
+                                + " does not equal "
+                                + word);
+                        //append incorrect answer
+                        word = word + " (your answer: " + answerInput + ")";
+                        incorrectWords.add(word);
+                        Log.d(TAG, "submit onClick: " + word + " added to incorrectWords ArrayList");
+
+                        //todo populate image view animation for 3 seconds then fade
                     }
+                }else{
+                    Toast.makeText(getActivity(),
+                            "Aww, there's been an error. Your answer is not valid.",
+                            Toast.LENGTH_LONG).show();
                 }
 
-                //populate the next question
+                if(counter < questionWords.size() - 1){
+                    Log.d(TAG, "submit onClick: counter is at element no. "
+                            + counter
+                            + "/"
+                            + questionWords.size());
+                    counter ++;
+                    Log.d(TAG, "submit onClick: update counter to " + counter);
+                    word = questionWords.get(counter);
+                    Log.d(TAG, "submit onClick: new word is " + word);
+                    //populate the next question
+                    new FightScreenFragment.GetDefinitionTask().execute();
+                } else if (counter == questionWords.size()- 1){
+                    Log.d(TAG, "submit onClick: reached the final element in questionWords array");
+                }
+
+
                 //if end of the cycle, go to skip array
                 //if end of skip array or skip array is empty, go to score screen
                 //set animation to score screen if time
@@ -167,23 +204,30 @@ public class FightScreenFragment extends Fragment {
         return v;
     }
 
-    private boolean validateAnswer(EditText mETAnswer){
+    private boolean validateAnswer(String answerInput){
         Log.d(TAG, "validateAnswer: start");
         Log.d(TAG, "validateAnswer: note that word is " + word);
-        answerInput = mETAnswer.getText().toString().trim();
-        Log.d(TAG, "validateAnswer: check is answerInput is null: " + answerInput);
+        Log.d(TAG, "validateAnswer: the answerInput value is: " + answerInput);
 
-//        if(answerInput.isEmpty()){
-//            til_answer.setError("Aww, let's not submit an empty answer! Skip if you're unsure.");
-//            return false;
-//        }else if (answerInput.length() > 20) {
-//            til_answer.setError("Looks like your answer is too long...");
-//            return false;
-//        }else{
-//            til_answer.setError(null);
-//            return true;
-//        }
-        return false;
+        //cases for Answer validity to submit (must not be empty, or too long)
+        if(answerInput.length() == 0){
+            Log.d(TAG, "validateAnswer: answerInput value '" + answerInput + "' ...is empty");
+            Toast.makeText(getActivity(),
+                    "Aww, let's not submit an empty answer! Skip if you're unsure.",
+                    Toast.LENGTH_LONG).show();
+
+            return false;
+        }else if (answerInput.length() > 20) {
+            Log.d(TAG, "validateAnswer: answerInput value: " + answerInput + "is too long");
+            Toast.makeText(getActivity(),
+                    "Looks like your answer is too long...",
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }else{
+            Log.d(TAG, "validateAnswer: answerInput value: '" + answerInput + "' is valid");
+            return true;
+        }
+
     }
 
 

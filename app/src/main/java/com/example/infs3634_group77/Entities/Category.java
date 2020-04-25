@@ -60,7 +60,7 @@ public class Category {
         categories.add(new Category(
                 "Shopping", "Types of shops and important vocabulary",
                 R.drawable.category_icon3, new ArrayList <String> (Arrays.asList(
-                        "Supermarket", "Grocery", "Kiosk", "Restaurant", "Cafe", "Food court", "Retail", "Convenience store"))));
+                        "Supermarket", "Grocery", "Kiosk", "Restaurant", "Cafe", "Retail", "Convenience store"))));
         categories.add(new Category(
                 "Society", "Australian society vocabulary",
                 R.drawable.category_icon4, new ArrayList <String> (Arrays.asList(
