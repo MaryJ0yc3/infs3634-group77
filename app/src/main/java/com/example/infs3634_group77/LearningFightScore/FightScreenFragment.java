@@ -41,12 +41,7 @@ public class FightScreenFragment extends Fragment {
     private String definition;
     private ArrayList<String> questionWords;
     private int counter = 0;
-    private TextView question;
-    private Button submit;
-    private Button skip;
-    private Button help;
-    private TextInputLayout til_answer;
-    private EditText editText_answer;
+
 
     //bundle Arraylists
     private ArrayList<String> correctWords = new ArrayList<>();
@@ -55,21 +50,6 @@ public class FightScreenFragment extends Fragment {
     private ArrayList<String> finalSkipWords = new ArrayList<>();
 
 
-    //PSEUDOCODE
-
-
-    //optional image view (if null url, set not visible?)
-    //use tab layout to insert answer. Once finished typing, hit submit (has if else statements)
-        //Each time it's correct,  add to "correctWords" array list, happy animation
-        //Each time it's incorrect, add to "wrongWords" array list, sad animation
-    //if they have three incorrect words, launch score screen and display array lists with results
-    //If they hit skip button, word is added to "last chance Arraylist"
-    //once finished array list, go to last chance arraylist and cycle through. move to appropriate word list according to result
-    //If last word of wordList, submit button checks last chance arraylist..
-                           // if last chance array list = size 0, create bundle of correct and wrong arraylist
-                            // if last change array list is >0, cycle through
-            // then press submit button recognises no words left, replace fragment with score screen
-            // send through bundle.
     public FightScreenFragment() { }
 
 
@@ -84,7 +64,6 @@ public class FightScreenFragment extends Fragment {
             word = questionWords.get(0);
             //Async task execute
             new FightScreenFragment.GetDefinitionTask().execute();
-
         }
     }
 
@@ -104,12 +83,6 @@ public class FightScreenFragment extends Fragment {
 
         int originalQListSize = questionWords.size();
 
-
-
-        //score screen bundle components
-
-
-
         //set onClick listener for submit.
         // 1) check validity and add to correct, incorrect or skip arraylist
         // 2) populate the next question by using counter
@@ -123,7 +96,7 @@ public class FightScreenFragment extends Fragment {
                 Log.d(TAG, "submit onClick: is '" + answerInput + "' valid? " + checkValidity);
                 if(checkValidity == true){
                     Log.d(TAG, "submit onClick: check if word is correct or incorrect");
-                    if(answerInput.equals(word.toLowerCase().trim())){
+                    if(answerInput.toLowerCase().equals(word.toLowerCase().trim())){
                         Log.d(TAG, "submit onClick: Correct! "
                                         + answerInput
                                         + " equals "
@@ -151,8 +124,6 @@ public class FightScreenFragment extends Fragment {
                             Toast.LENGTH_LONG).show();
                 }
 
-
-
                 //populate question tv with next word
                 if(counter < questionWords.size() - 1){
                     Log.d(TAG, "submit onClick: counter is at element no. "
@@ -169,13 +140,13 @@ public class FightScreenFragment extends Fragment {
                     editText_answer.setText("");
                 } else if (counter == questionWords.size()- 1){
                     Log.d(TAG, "submit onClick: no more elements left in questionWords array");
-                    if(tempSkipWords.size()==0){
+                    if(tempSkipWords.size() != 0){
                         for(int i = 0; i < tempSkipWords.size() - 1; i++){
                             //add all skip words to questionWords
                             Log.d(TAG, "submit onClick: adding to questionWords " + tempSkipWords.get(i));
                             questionWords.add(tempSkipWords.get(i));
                             Log.d(TAG, "submit onClick: finished add to questionWords " + tempSkipWords.get(i));
-                            //delete all from Skip words
+                            tempSkipWords.remove(i);
                         }
 
                     }else{
@@ -191,9 +162,7 @@ public class FightScreenFragment extends Fragment {
 
                     }
                 }
-
                 //set animation to score screen if time
-
             }
         });
 
@@ -267,7 +236,7 @@ public class FightScreenFragment extends Fragment {
         if(answerInput.length() == 0){
             Log.d(TAG, "validateAnswer: answerInput value '" + answerInput + "' ...is empty");
             Toast.makeText(getActivity(),
-                    "Aww, let's not submit an empty answer! Skip if you're unsure.",
+                    "Aww, let's not submit an empty answer! Next time, skip if you're unsure.",
                     Toast.LENGTH_LONG).show();
 
             return false;
@@ -283,8 +252,6 @@ public class FightScreenFragment extends Fragment {
         }
 
     }
-
-
 
     // Auth Token 14bffab1e7b99dd69186fac5837139842c67aab5
     private class GetDefinitionTask extends AsyncTask<Void, Void, DefinitionResponse> {
