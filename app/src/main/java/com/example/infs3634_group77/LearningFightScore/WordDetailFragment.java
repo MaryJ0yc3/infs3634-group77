@@ -10,17 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.infs3634_group77.Entities.Category;
 import com.example.infs3634_group77.Entities.DefinitionResponse;
 import com.example.infs3634_group77.Helpers.DefinitionService;
-import com.example.infs3634_group77.Helpers.WordListAdapter;
-import com.example.infs3634_group77.HomeScreenFragment;
 import com.example.infs3634_group77.R;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -33,7 +26,7 @@ public class WordDetailFragment extends Fragment {
     private String TAG = "WordDetailFragment";
     private String word;
     private String definition;
-    private String pronunciation;
+    private String example;
 
     public WordDetailFragment() {
     }
@@ -63,7 +56,7 @@ public class WordDetailFragment extends Fragment {
             public void onClick(View v) {
                 Log.d(TAG, "onClick: Exit Button");
                 Fragment fragment = new WordListFragment();
-                getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
             }
         });
         return v;
@@ -71,10 +64,10 @@ public class WordDetailFragment extends Fragment {
 
     private void updateUi(){
         View v = getView();
-        if (v != null && (word != null || definition != null || pronunciation != null)) {
+        if (v != null && (word != null || definition != null || example != null)) {
             ((TextView) v.findViewById(R.id.tvWord)).setText(word);
             ((TextView) v.findViewById(R.id.tvDefinition)).setText(definition);
-            ((TextView) v.findViewById(R.id.tvPronunciation)).setText(pronunciation);
+            ((TextView) v.findViewById(R.id.tvExample)).setText(example);
         }
     }
 
@@ -95,6 +88,8 @@ public class WordDetailFragment extends Fragment {
                 Response<DefinitionResponse> definitionResponse = call.execute();
                 Log.d(TAG, "doInBackground: definitionResponse execute");
                 DefinitionResponse wordDetail = definitionResponse.body();
+                wordDetail.setFirstDefinition(wordDetail.getDefinitions().get(0).getDefinition());
+                wordDetail.setExample(wordDetail.getDefinitions().get(0).getExample());
                 // Currently only calls API once for the first word in the list
                 return wordDetail;
             } catch (IOException e) {
@@ -108,8 +103,8 @@ public class WordDetailFragment extends Fragment {
         protected void onPostExecute(DefinitionResponse word) {
             // Add to the definitions List in WordListFragment instead so can pass it on to FightScreen
             Log.d(TAG, "onPostExecute: new DefinitionResponse word is: " + word.getWord() + " with definition " + word.getFirstDefinition());
-            definition = word.getDefinitions().get(0).getDefinition();
-            pronunciation = word.getPronunciation();
+            definition = word.getFirstDefinition();
+            example = word.getExample();
             updateUi();
             // Can also call for example, and image
             Log.d(TAG, "onPostExecute: Added new DefinitionResponse");

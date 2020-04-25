@@ -20,6 +20,8 @@ public class DefinitionResponse {
     // Definition that will store the first Definition to show in WordListFragment for learning
     private String firstDefinition;
 
+    private String example;
+
     public String getFirstDefinition() {
         return firstDefinition;
     }
@@ -27,6 +29,12 @@ public class DefinitionResponse {
     public void setFirstDefinition(String definition) {
         firstDefinition = definition;
     }
+
+    public String getExample(){
+        return example;
+    }
+
+    public void setExample(String input) { example = input;}
 
     public List<Definition> getDefinitions() {
         return definitions;
