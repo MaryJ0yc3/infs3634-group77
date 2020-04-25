@@ -1,11 +1,13 @@
 package com.example.infs3634_group77.LearningFightScore;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.toptas.fancyshowcase.FancyShowCaseQueue;
+import me.toptas.fancyshowcase.FancyShowCaseView;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -38,6 +42,7 @@ public class FightScreenFragment extends Fragment {
     private TextView question;
     private Button submit;
     private Button skip;
+    private Button help;
     private TextInputLayout til_answer;
     private EditText editText_answer;
 
@@ -91,6 +96,7 @@ public class FightScreenFragment extends Fragment {
         Button skip = v.findViewById(R.id.skipBtn);
         TextInputLayout til_answer = v.findViewById(R.id.til_answer);
         EditText editText_answer = v.findViewById(R.id.editText_answer);
+        Button help = v.findViewById(R.id.help);
 
 
         //score screen bundle components
@@ -133,6 +139,28 @@ public class FightScreenFragment extends Fragment {
             public void onClick(View v) {
                 //add to Skip array
 
+            }
+        });
+
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FancyShowCaseView fancyShowCaseView1 = new FancyShowCaseView.Builder(getActivity())
+                        .title("When confident click here")
+                        .titleStyle(0, Gravity.CENTER)
+                        .focusOn(submit)
+                        .build();
+                final FancyShowCaseView fancyShowCaseView2 = new FancyShowCaseView.Builder(getActivity())
+                        .title("If the question is too hard")
+                        .titleStyle(0, Gravity.CENTER)
+                        .focusOn(skip)
+                        .build();
+
+                FancyShowCaseQueue mQueue = new FancyShowCaseQueue()
+                        .add(fancyShowCaseView1)
+                        .add(fancyShowCaseView2);
+
+                mQueue.show();
             }
         });
 
