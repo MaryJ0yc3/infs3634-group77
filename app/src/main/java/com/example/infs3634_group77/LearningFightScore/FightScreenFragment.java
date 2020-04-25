@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.infs3634_group77.Entities.DefinitionResponse;
@@ -38,6 +39,7 @@ public class FightScreenFragment extends Fragment {
     private Button submit;
     private Button skip;
     private TextInputLayout til_answer;
+    private EditText editText_answer;
 
 
     //PSEUDOCODE
@@ -88,6 +90,8 @@ public class FightScreenFragment extends Fragment {
         Button submit = v.findViewById(R.id.submitBtn);
         Button skip = v.findViewById(R.id.skipBtn);
         TextInputLayout til_answer = v.findViewById(R.id.til_answer);
+        EditText editText_answer = v.findViewById(R.id.editText_answer);
+
 
         //score screen bundle components
 
@@ -97,13 +101,19 @@ public class FightScreenFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean checkValidity = validateAnswer();
+                Log.d(TAG, "submit onClick: start");
+                boolean checkValidity = validateAnswer(editText_answer);
                 if(checkValidity == true){
-                    answerInput = til_answer.getEditText().getText().toString().trim();
+                    Log.d(TAG, "submit onClick: check validity start");
+                    answerInput = editText_answer.getText().toString().trim();
+                    Log.d(TAG, "submit onClick: answerInput succesfully created");
                     if(answerInput.equals(word)){
+                        Log.d(TAG, "submit onClick: answerInput equals the current question word");
                         //if word is correct, put in correct Array list
                         //populate image view animation for 3 seconds then fade
+
                     }else{
+                        Log.d(TAG, "submit onClick: answerInput is incorrect");
                         //if word is incorrect, append incorrect spelling to word
                         // then put in wrong Array list
                         //populate image view animation for 3 seconds then fade
@@ -129,19 +139,23 @@ public class FightScreenFragment extends Fragment {
         return v;
     }
 
-    private boolean validateAnswer(){
-        answerInput = til_answer.getEditText().getText().toString().trim();
+    private boolean validateAnswer(EditText mETAnswer){
+        Log.d(TAG, "validateAnswer: start");
+        Log.d(TAG, "validateAnswer: note that word is " + word);
+        answerInput = mETAnswer.getText().toString().trim();
+        Log.d(TAG, "validateAnswer: check is answerInput is null: " + answerInput);
 
-        if(answerInput.isEmpty()){
-            til_answer.setError("Aww, let's not submit an empty answer! Skip if you're unsure.");
-            return false;
-        }else if (answerInput.length() > 20) {
-            til_answer.setError("Looks like your answer is too long...");
-            return false;
-        }else{
-            til_answer.setError(null);
-            return true;
-        }
+//        if(answerInput.isEmpty()){
+//            til_answer.setError("Aww, let's not submit an empty answer! Skip if you're unsure.");
+//            return false;
+//        }else if (answerInput.length() > 20) {
+//            til_answer.setError("Looks like your answer is too long...");
+//            return false;
+//        }else{
+//            til_answer.setError(null);
+//            return true;
+//        }
+        return false;
     }
 
 
