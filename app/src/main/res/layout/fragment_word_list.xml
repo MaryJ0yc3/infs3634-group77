@@ -32,16 +32,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="2dp"
-        android:text="EXIT"
+        android:text="BACK"
         app:layout_constraintBottom_toTopOf="@+id/wordListInstructions"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/wordListInstructions"
-        android:layout_width="wrap_content"
+        android:layout_width="282dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="13dp"
-        android:text="Learn your words! Click start when you are ready."
+        android:text="Click a word to learn what it means. Click START to get tested!"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

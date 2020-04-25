@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,9 +41,7 @@ public class HomeScreenFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-
     public HomeScreenFragment() {
-
     }
 
     @Override
@@ -54,12 +53,8 @@ public class HomeScreenFragment extends Fragment {
 
         // Making RecyclerView. need to use v. because we're inflating
         RecyclerView mRecyclerView = v.findViewById(R.id.rvHome);
-        Log.d(TAG, "on createView: finished finding rvHome");
         mRecyclerView.setHasFixedSize(true);
-        Log.d(TAG, "on createView: setHAsFixedSize true");
-
         mLayoutManager = new LinearLayoutManager(getContext());
-        Log.d(TAG, "on createView: finished mLayoutManager .... get Context instead of this");
         mRecyclerView.setLayoutManager(mLayoutManager);
         Log.d(TAG, "on createView: finished setting mRecyclerView as mLayoutManager");
 
@@ -68,7 +63,13 @@ public class HomeScreenFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Log.d(TAG, "onClick: starting");
+                // Setting category within Main Activity
+                Category category = new Category();
+                ((MainActivity)getActivity()).setCategory(category.getCategories().get(position));
+                Log.d(TAG, "onClick: MainActivity new Category = " + ((MainActivity)getActivity()).getCategory().getCategoryName());
+                // Moving to next fragment
                 Fragment fragment = new WordListFragment();
+                getParentFragmentManager().beginTransaction().add(R.id.fragmentContainer, fragment, "wordListFragment");
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", position);
                 fragment.setArguments((bundle));
@@ -77,13 +78,10 @@ public class HomeScreenFragment extends Fragment {
             }
 
         };
-
         mAdapter = new CategoryAdapter(Category.getCategories(), listener);
         Log.d(TAG, "on createView: finished creating CategoryAdapter");
         mRecyclerView.setAdapter(mAdapter);
         Log.d(TAG, "on createView: finished setting Adapter");
-
-        Log.d(TAG, "on createView: starting return v");
         return v;
     }
 

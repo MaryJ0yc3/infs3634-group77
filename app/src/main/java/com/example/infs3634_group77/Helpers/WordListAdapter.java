@@ -47,14 +47,6 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         @Override
         public void onClick(View view) {
             mListener.onClick(view, getAdapterPosition());
-            /*Bundle arguments = new Bundle();
-            arguments.putString("Word", selectedWord);
-            // On click of the row, pass clicked word and change to WordDetailFragment
-            WordDetailFragment fragment = new WordDetailFragment();
-            fragment.setArguments(arguments);
-            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
-            mParentActivity.getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment);*/
-
         }
     }
 

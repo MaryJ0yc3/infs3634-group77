@@ -3,13 +3,18 @@ package com.example.infs3634_group77;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.example.infs3634_group77.Entities.Category;
+import com.example.infs3634_group77.Entities.Definition;
 import com.example.infs3634_group77.Entities.DefinitionResponse;
+import com.example.infs3634_group77.LearningFightScore.FightScreenFragment;
+import com.example.infs3634_group77.LearningFightScore.WordDetailFragment;
+import com.example.infs3634_group77.LearningFightScore.WordListFragment;
 import com.example.infs3634_group77.Settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -34,11 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
         // initialising bottom navigation
         bottomNavigationView = findViewById(R.id.bottomNav);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
 
         //Navigation straight to home screen if previously haven't used app
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeScreenFragment()).commit();
+            Fragment fragment = new HomeScreenFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
         }
 
         // Code to change fragments depending on which menuItem is pressed
@@ -46,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment fragment = null;
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
                 switch (menuItem.getItemId()) {
                     case R.id.home:
                         fragment = new HomeScreenFragment();
@@ -57,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new SettingsFragment();
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
+                fragmentTransaction.replace(R.id.fragmentContainer,fragment).commit();
                 return true;
             }
         });
@@ -65,4 +74,19 @@ public class MainActivity extends AppCompatActivity {
         //softkeyboard layout changes
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
+
+    public Category getCategory() {return category;}
+
+    public void setCategory(Category mCategory) {
+        category = mCategory;
+    }
+
+    /*public void resetDefinitionResponseList(ArrayList<DefinitionResponse> newList) {
+        if (wordArrayList != null) { wordArrayList.clear(); }
+        wordArrayList.addAll(newList);
+        notifyAll();
+    }
+
+    public void addDefinitionResponseList(DefinitionResponse newResponse) {wordArrayList.add(newResponse)};
+     */
 }
