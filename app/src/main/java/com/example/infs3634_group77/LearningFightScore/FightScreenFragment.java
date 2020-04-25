@@ -95,6 +95,7 @@ public class FightScreenFragment extends Fragment {
                 boolean checkValidity = validateAnswer(answerInput.toLowerCase());
                 Log.d(TAG, "submit onClick: is '" + answerInput + "' valid? " + checkValidity);
                 if(checkValidity == true){
+                    //check correct or incorrect
                     Log.d(TAG, "submit onClick: check if word is correct or incorrect");
                     if(answerInput.toLowerCase().equals(word.toLowerCase().trim())){
                         Log.d(TAG, "submit onClick: Correct! "
@@ -104,9 +105,9 @@ public class FightScreenFragment extends Fragment {
                         correctWords.add(word);
                         Log.d(TAG, "submit onClick: " + word + " added to correctWords ArrayList");
 
-                        //todo populate image view animation for 3 seconds then fade
+                        //maybetodo populate image view animation for 3 seconds then fade
 
-                    }else{
+                    }else {
                         Log.d(TAG, "submit onClick: incorrect! "
                                 + answerInput
                                 + " does not equal "
@@ -116,8 +117,9 @@ public class FightScreenFragment extends Fragment {
                         incorrectWords.add(word);
                         Log.d(TAG, "submit onClick: " + word + " added to incorrectWords ArrayList");
 
-                        //todo populate image view animation for 3 seconds then fade
+                        //maybtodo populate image view animation for 3 seconds then fade
                     }
+                //if answer is not valid
                 }else{
                     Toast.makeText(getActivity(),
                             "Aww, there's been an error. Your answer is not valid.",
@@ -139,7 +141,26 @@ public class FightScreenFragment extends Fragment {
                     //clear editText
                     editText_answer.setText("");
                 } else if (counter == questionWords.size()- 1){
-                    Log.d(TAG, "submit onClick: no more elements left in questionWords array");
+                    Log.d(TAG, "submit onClick: no more elements left in questionWords array. Adding tempSkipWords now");
+                    //add final word before proceeding (doesn't do it in normal one)
+                    if(answerInput.toLowerCase().equals(word.toLowerCase().trim())) {
+                        Log.d(TAG, "submit onClick: Correct! "
+                                + answerInput
+                                + " equals "
+                                + word);
+                        correctWords.add(word);
+                        Log.d(TAG, "submit onClick: " + word + " added to correctWords ArrayList");
+                    }else {
+                        Log.d(TAG, "submit onClick: incorrect! "
+                                + answerInput
+                                + " does not equal "
+                                + word);
+                        //append incorrect answer
+                        word = word + " (your answer: " + answerInput + ")";
+                        incorrectWords.add(word);
+                        Log.d(TAG, "submit onClick: " + word + " added to incorrectWords ArrayList");
+                    }
+
                     if(tempSkipWords.size() != 0){
                         for(int i = 0; i < tempSkipWords.size() - 1; i++){
                             //add all skip words to questionWords
