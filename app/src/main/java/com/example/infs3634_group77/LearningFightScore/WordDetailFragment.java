@@ -1,5 +1,6 @@
 package com.example.infs3634_group77.LearningFightScore;
 
+import android.app.ProgressDialog;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.infs3634_group77.Entities.DefinitionResponse;
 import com.example.infs3634_group77.Helpers.DefinitionService;
+import com.example.infs3634_group77.MainActivity;
 import com.example.infs3634_group77.R;
 
 import java.io.IOException;
@@ -81,6 +83,12 @@ public class WordDetailFragment extends Fragment {
     private class GetDefinitionTask extends AsyncTask<Void, Void, DefinitionResponse> {
         String authToken = ("Token 14bffab1e7b99dd69186fac5837139842c67aab5");
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            ((MainActivity)getActivity()).showProgressBar();
+        }
+
+        @Override
         protected DefinitionResponse doInBackground(Void... voids) {
             Log.d(TAG, "doInBackground: Start");
             try {
@@ -113,7 +121,7 @@ public class WordDetailFragment extends Fragment {
             example = word.getExample();
             imageUrl = word.getDefinitions().get(0).getImageUrl();
             updateUi();
-            // Can also call for example, and image
+            ((MainActivity)getActivity()).hideProgressBar();
             Log.d(TAG, "onPostExecute: Added new DefinitionResponse");
         }
     }

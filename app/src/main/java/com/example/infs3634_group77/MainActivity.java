@@ -8,7 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.example.infs3634_group77.Entities.Category;
 import com.example.infs3634_group77.Entities.Definition;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Category category;
     MediaPlayer mPlayer;
+    ProgressBar progressBar;
 
     // ArrayList of word and definitions as created from repeat API call from one category
     ArrayList<DefinitionResponse> wordArrayList;
@@ -43,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.elevator);
         mPlayer.setLooping(true);
         mPlayer.start();
+
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        progressBar.setVisibility(View.GONE);
 
         // initialising bottom navigation
         bottomNavigationView = findViewById(R.id.bottomNav);
@@ -108,12 +117,8 @@ public class MainActivity extends AppCompatActivity {
         category.setBestScore(score);
     }
 
-    /*public void resetDefinitionResponseList(ArrayList<DefinitionResponse> newList) {
-        if (wordArrayList != null) { wordArrayList.clear(); }
-        wordArrayList.addAll(newList);
-        notifyAll();
-    }
+    public void showProgressBar() {progressBar.setVisibility(View.VISIBLE);}
 
-    public void addDefinitionResponseList(DefinitionResponse newResponse) {wordArrayList.add(newResponse)};
-     */
+    public void hideProgressBar() {progressBar.setVisibility(View.GONE);}
+
 }
