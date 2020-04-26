@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -18,6 +19,7 @@ import com.example.infs3634_group77.LearningFightScore.WordListFragment;
 import com.example.infs3634_group77.Settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     //Joyce might add animations later
     BottomNavigationView bottomNavigationView;
     Category category;
+    MediaPlayer mPlayer;
 
     // ArrayList of word and definitions as created from repeat API call from one category
     ArrayList<DefinitionResponse> wordArrayList;
@@ -36,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.elevator);
+        mPlayer.setLooping(true);
+        mPlayer.start();
 
         // initialising bottom navigation
         bottomNavigationView = findViewById(R.id.bottomNav);
@@ -73,6 +80,20 @@ public class MainActivity extends AppCompatActivity {
 
         //softkeyboard layout changes
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    }
+
+    private void releaseMediaPlayer(){
+        if(mPlayer != null)
+        {
+            mPlayer.release();
+            mPlayer = null;
+        }
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        releaseMediaPlayer();
     }
 
     public Category getCategory() {return category;}
