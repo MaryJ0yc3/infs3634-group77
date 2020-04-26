@@ -190,9 +190,16 @@ public class FightScreenFragment extends Fragment {
                         .focusOn(skip)
                         .build();
 
+                final FancyShowCaseView fancyShowCaseView3 = new FancyShowCaseView.Builder(getActivity())
+                        .title("Use the dictionary to refresh your memory!")
+                        .titleStyle(0, Gravity.CENTER)
+                        .focusOn(question)
+                        .build();
+
                 FancyShowCaseQueue mQueue = new FancyShowCaseQueue()
                         .add(fancyShowCaseView1)
-                        .add(fancyShowCaseView2);
+                        .add(fancyShowCaseView2)
+                        .add(fancyShowCaseView3);
 
                 mQueue.show();
             }
