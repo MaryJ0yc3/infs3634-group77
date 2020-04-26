@@ -21,7 +21,7 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="16dp"
         android:text="Example:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/darkGreen"
@@ -32,10 +32,10 @@
         android:id="@+id/textInputLayout"
         android:layout_width="271dp"
         android:layout_height="62dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/googlebtn">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/type_word"
@@ -58,11 +58,11 @@
         android:id="@+id/wordtv"
         android:layout_width="307dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/googlebtn" />
+        app:layout_constraintStart_toStartOf="@+id/pronouncetv"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <TextView
         android:id="@+id/pronouncetv"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintStart_toStartOf="@+id/wordtv"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/wordtv" />
 
     <TextView
@@ -87,7 +87,8 @@
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <ImageView
@@ -117,27 +118,35 @@
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_search"
         app:layout_constraintEnd_toEndOf="@+id/searchbtn"
-        app:layout_constraintTop_toBottomOf="@+id/googletv" />
+        app:layout_constraintTop_toTopOf="@+id/googletv" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:text="Description:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/darkGreen"
-        app:layout_constraintStart_toStartOf="@+id/pronouncetv"
+        app:layout_constraintStart_toStartOf="@+id/definitiontv"
         app:layout_constraintTop_toBottomOf="@+id/pronouncetv" />
 
     <TextView
         android:id="@+id/googletv"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:text="Click below to see more"
+        android:text="Click to google word"
         android:textAlignment="textEnd"
-        app:layout_constraintEnd_toEndOf="@+id/googlebtn"
-        app:layout_constraintTop_toBottomOf="@+id/searchbtn" />
+        app:layout_constraintEnd_toStartOf="@+id/googlebtn"
+        app:layout_constraintTop_toTopOf="@+id/helpbtn" />
+
+    <Button
+        android:id="@+id/helpbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="HELP"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
