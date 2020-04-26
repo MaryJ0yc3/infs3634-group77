@@ -108,6 +108,11 @@ public class DictionaryScreenFragment extends Fragment {
 
     private class GetDefinitionTask extends AsyncTask<Void, Void, DefinitionResponse> {
         String authToken = ("Token 14bffab1e7b99dd69186fac5837139842c67aab5");
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            ((MainActivity)getActivity()).showProgressBar();
+        }
 
         @Override
         protected DefinitionResponse doInBackground(Void... voids) {
@@ -144,6 +149,7 @@ public class DictionaryScreenFragment extends Fragment {
             type = word.getDefinitions().get(0).getType();
             imageUrl = word.getDefinitions().get(0).getImageUrl();
             updateUi();
+            ((MainActivity)getActivity()).hideProgressBar();
             edit.clearComposingText();
             // Can also call for example, and image
             Log.d(TAG, "onPostExecute: Added new DefinitionResponse");

@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
         mPlayer.start();
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         progressBar.setVisibility(View.GONE);
 
         // initialising bottom navigation
@@ -117,8 +115,16 @@ public class MainActivity extends AppCompatActivity {
         category.setBestScore(score);
     }
 
-    public void showProgressBar() {progressBar.setVisibility(View.VISIBLE);}
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
 
-    public void hideProgressBar() {progressBar.setVisibility(View.GONE);}
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
 
 }
