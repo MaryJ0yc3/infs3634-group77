@@ -7,6 +7,15 @@
     tools:context=".Settings.AcknowledgementFragment">
 
     <TextView
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/custom_card_gradient"
+        android:text="References: \n Royalty free music from https://www.fesliyanstudios.com \n \n https://owlbot.info/?ref=public-apis"/>
+
+
+
+    <TextView
         android:id="@+id/about"
         android:layout_width="348dp"
         android:layout_height="wrap_content"
