@@ -1,5 +1,7 @@
 package com.example.infs3634_group77.Settings;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,6 +23,9 @@ import java.util.Objects;
 
 
 public class SettingsFragment extends Fragment {
+
+    private SeekBar seekBar;
+    private AudioManager audioManager;
     //Adding text so its pushable
     //has text field with dummy data profile name
 
@@ -55,6 +61,11 @@ public class SettingsFragment extends Fragment {
         ArrayAdapter<CharSequence> mSortAdapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_item, values);
         mSortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(mSortAdapter);
+
+        seekBar = v.findViewById(R.id.seekBar);
+        audioManager = (AudioManager) getActivity().getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+        seekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        seekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
 
         return v;
     }
