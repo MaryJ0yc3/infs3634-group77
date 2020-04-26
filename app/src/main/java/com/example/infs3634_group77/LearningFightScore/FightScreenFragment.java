@@ -191,7 +191,7 @@ public class FightScreenFragment extends Fragment {
                         .build();
 
                 final FancyShowCaseView fancyShowCaseView3 = new FancyShowCaseView.Builder(getActivity())
-                        .title("Use the dictionary to refresh your memory!")
+                        .title("Your question appears here!")
                         .titleStyle(0, Gravity.CENTER)
                         .focusOn(question)
                         .build();
