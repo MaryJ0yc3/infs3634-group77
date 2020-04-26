@@ -147,7 +147,7 @@
         android:id="@+id/googletv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:text="Click here to google the word"
         android:textSize="15dp"
@@ -155,19 +155,7 @@
         android:textColor="#fff9df"
         android:textAlignment="textEnd"
         app:layout_constraintEnd_toStartOf="@+id/googlebtn"
-        app:layout_constraintTop_toTopOf="@+id/helpbtn" />
-
-    <Button
-        android:id="@+id/helpbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:text="HELP"
-        android:background="@drawable/custom_button"
-        android:textColor="#000"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
