@@ -308,7 +308,7 @@ public class FightScreenFragment extends Fragment {
             definition = word.getDefinitions().get(0).getDefinition();
             View v = getView();
             ((TextView) v.findViewById(R.id.tvQuestion)).setText("What word means \""
-                    + definition + "\"");
+                    + definition + "\"?");
             // Can also call for example, and image
             Log.d(TAG, "onPostExecute: Added new DefinitionResponse");
         }
