@@ -8,37 +8,45 @@
 
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="score screen fragment - comes after fight screen fragment" />
-
-    <TextView
         android:id="@+id/tvCorrectNo"
+        android:background="@drawable/custom_card_gradient"
+        android:padding="3dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="100dp"
         android:text="Correct:"
+        android:textColor="#4d3751"
+        android:textSize="25dp"
+        android:textStyle="normal|bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvIncorrectNo"
+        android:background="@drawable/custom_card_gradient"
+        android:padding="3dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="100dp"
         android:text="Incorrect:"
+        android:textColor="#4d3751"
+        android:textSize="25dp"
+        android:textStyle="normal|bold"
         app:layout_constraintStart_toEndOf="@+id/tvCorrectNo"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvCorrectList"
-        android:layout_width="150dp"
-        android:layout_height="400dp"
+        android:layout_width="130dp"
+        android:layout_height="529dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
         android:text="Correct List"
+        android:textColor="#fff9df"
+        android:textSize="17dp"
+        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCorrectNo">
 
@@ -46,11 +54,14 @@
 
     <TextView
         android:id="@+id/tvIncorrectList"
-        android:layout_width="150dp"
-        android:layout_height="400dp"
-        android:layout_marginStart="128dp"
+        android:layout_width="155dp"
+        android:layout_height="524dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         android:text="Incorrect List"
+        android:textColor="#fff9df"
+        android:textSize="17dp"
+        android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@+id/tvCorrectNo"
         app:layout_constraintTop_toBottomOf="@+id/tvIncorrectNo">
 
@@ -61,8 +72,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_card_gradient"
+        android:padding="7dp"
         android:text="Score:"
+        android:textColor="#4d3751"
+        android:textSize="35dp"
+        android:textStyle="normal|bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -73,6 +73,7 @@ public class ScoreScreenFragment extends Fragment {
             String mCorrectWord = correctWords.get(i);
             fullCorrectListFormatted = fullCorrectListFormatted
                     + "\n"
+                    + "\n"
                     + mCorrectWord;
         }
 
@@ -80,6 +81,7 @@ public class ScoreScreenFragment extends Fragment {
         for(int i = 0; i < incorrectWords.size() ; i++){
             String mIncorrectWord = incorrectWords.get(i);
             fullIncorrectListFormatted = fullIncorrectListFormatted
+                    + "\n"
                     + "\n"
                     + mIncorrectWord;
         }
