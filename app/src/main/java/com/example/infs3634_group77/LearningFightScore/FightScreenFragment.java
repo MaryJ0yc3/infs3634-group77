@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.infs3634_group77.Entities.DefinitionResponse;
 import com.example.infs3634_group77.Helpers.DefinitionService;
+import com.example.infs3634_group77.MainActivity;
 import com.example.infs3634_group77.R;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -58,13 +59,12 @@ public class FightScreenFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            Bundle bundle = getArguments();
-            questionWords = bundle.getStringArrayList("category words");
-            //populate with first question
-            word = questionWords.get(0);
-            //Async task execute
-            new FightScreenFragment.GetDefinitionTask().execute();
         }
+        questionWords = ((MainActivity)getActivity()).getCategory().getWordList();
+        //populate with first question
+        word = questionWords.get(0);
+        //Async task execute
+        new FightScreenFragment.GetDefinitionTask().execute();
     }
 
     @Override
@@ -142,24 +142,24 @@ public class FightScreenFragment extends Fragment {
                     editText_answer.setText("");
                 } else if (counter == questionWords.size()- 1){
                     Log.d(TAG, "submit onClick: no more elements left in questionWords array. Adding tempSkipWords now");
-                    //add final word before proceeding (doesn't do it in normal one)
-                    if(answerInput.toLowerCase().equals(word.toLowerCase().trim())) {
-                        Log.d(TAG, "submit onClick: Correct! "
-                                + answerInput
-                                + " equals "
-                                + word);
-                        correctWords.add(word);
-                        Log.d(TAG, "submit onClick: " + word + " added to correctWords ArrayList");
-                    }else {
-                        Log.d(TAG, "submit onClick: incorrect! "
-                                + answerInput
-                                + " does not equal "
-                                + word);
-                        //append incorrect answer
-                        word = word + " (your answer: " + answerInput + ")";
-                        incorrectWords.add(word);
-                        Log.d(TAG, "submit onClick: " + word + " added to incorrectWords ArrayList");
-                    }
+//                    //add final word before proceeding (doesn't do it in normal one)
+//                    if(answerInput.toLowerCase().equals(word.toLowerCase().trim())) {
+//                        Log.d(TAG, "submit onClick: Correct! "
+//                                + answerInput
+//                                + " equals "
+//                                + word);
+//                        correctWords.add(word);
+//                        Log.d(TAG, "submit onClick: " + word + " added to correctWords ArrayList");
+//                    }else {
+//                        Log.d(TAG, "submit onClick: incorrect! "
+//                                + answerInput
+//                                + " does not equal "
+//                                + word);
+//                        //append incorrect answer
+//                        word = word + " (your answer: " + answerInput + ")";
+//                        incorrectWords.add(word);
+//                        Log.d(TAG, "submit onClick: " + word + " added to incorrectWords ArrayList");
+//                    }
 
                     if(tempSkipWords.size() != 0){
                         for(int i = 0; i < tempSkipWords.size() - 1; i++){
@@ -216,7 +216,7 @@ public class FightScreenFragment extends Fragment {
                     bundle.putStringArrayList("final skip words", incorrectWords);
                     fragment.setArguments((bundle));
                     getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
-                } else{
+                } else if(counter >= originalQListSize){
                     finalSkipWords.add(word);
                     //finalSkipWords to be displayed in score screen
                 }

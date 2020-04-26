@@ -73,7 +73,7 @@ public class ScoreScreenFragment extends Fragment {
 
         //formatting
         String fullCorrectListFormatted = "";
-        for(int i = 0; i < correctWords.size() - 1 ; i++){
+        for(int i = 0; i < correctWords.size(); i++){
             String mCorrectWord = correctWords.get(i);
             fullCorrectListFormatted = fullCorrectListFormatted
                     + "\n"
@@ -81,19 +81,19 @@ public class ScoreScreenFragment extends Fragment {
         }
 
         String fullIncorrectListFormatted = "";
-        for(int i = 0; i < incorrectWords.size() - 1 ; i++){
+        for(int i = 0; i < incorrectWords.size() ; i++){
             String mIncorrectWord = incorrectWords.get(i);
             fullIncorrectListFormatted = fullIncorrectListFormatted
                     + "\n"
                     + mIncorrectWord;
         }
 
-        for(int i = 0; i < finalSkipWords.size() - 1 ; i++){
-            String mIncorrectWord = finalSkipWords.get(i);
-            fullIncorrectListFormatted = fullIncorrectListFormatted
-                    + "\n"
-                    + mIncorrectWord;
-        }
+//        for(int i = 0; i < finalSkipWords.size() ; i++){
+//            String mIncorrectWord = finalSkipWords.get(i);
+//            fullIncorrectListFormatted = fullIncorrectListFormatted
+//                    + "\n"
+//                    + mIncorrectWord;
+//        }
 
 
         //setText
