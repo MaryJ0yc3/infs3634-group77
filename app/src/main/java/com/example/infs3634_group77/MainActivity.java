@@ -81,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
         category = mCategory;
     }
 
+    public int getCategoryScore() {return category.getBestScore();}
+
+    public void setCategoryScore(int score) {
+        category.setBestScore(score);
+    }
+
     /*public void resetDefinitionResponseList(ArrayList<DefinitionResponse> newList) {
         if (wordArrayList != null) { wordArrayList.clear(); }
         wordArrayList.addAll(newList);

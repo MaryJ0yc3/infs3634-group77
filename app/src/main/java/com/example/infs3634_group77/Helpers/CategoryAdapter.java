@@ -43,7 +43,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public TextView tvCategory, tvDesc;
+        public TextView tvCategory, tvDesc, tvBestScore, tvScore;
         public ImageView ivCategory;
 
         private RecyclerViewClickListener mListener;
@@ -54,8 +54,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             v.setOnClickListener(this);
             tvCategory = v.findViewById(R.id.tvCategory);
             tvDesc = v.findViewById(R.id.tvDesc);
+            tvBestScore = v.findViewById(R.id.tvBestScore);
+            tvScore = v.findViewById(R.id.tvScore);
             ivCategory = v.findViewById(R.id.ivCategory);
-
         }
 
         @Override
@@ -78,7 +79,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Category category = mCategories.get(position);
         holder.tvCategory.setText(category.getCategoryName());
         holder.tvDesc.setText(category.getDesc());
+        holder.tvBestScore.setText(category.getBestScore());
         holder.ivCategory.setImageResource(category.getIcon());
+
+        if (category.getBestScore() > 0) {
+            holder.tvBestScore.setVisibility(View.VISIBLE);
+            holder.tvScore.setVisibility(View.VISIBLE);
+        }
     }
 
     // Return the size of your data set (invoked by the layout manager)
@@ -86,6 +93,4 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public int getItemCount() {
         return mCategories.size();
     }
-
-
 }

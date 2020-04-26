@@ -13,15 +13,17 @@ public class Category {
     String desc;
     ArrayList<String> wordsList;
     int icon;
+    int bestScore;
 
     public Category(){}
 
 
-    public Category(String categoryName, String desc, int icon, ArrayList<String> words) {
+    public Category(String categoryName, String desc, int icon, ArrayList<String> words, int bestScore) {
         this.categoryName = categoryName;
         this.desc = desc;
         this.icon = icon;
         this.wordsList = words;
+        this.icon = bestScore;
     }
 
     public String getCategoryName() {
@@ -46,31 +48,45 @@ public class Category {
 
     public void setIcon(int icon) {this.icon = icon;}
 
+    public int getBestScore() {return bestScore;}
+
+    public void setBestScore(int score) {
+        if (score > bestScore) {
+            this.bestScore = score;
+        }
+    }
+
     //get categories method for the categories recycler view
     public static List<Category> getCategories(){
         List<Category> categories= new ArrayList<>();
         categories.add(new Category(
                 "University", "Key words needed to get by at University",
                 R.drawable.category_icon1, new ArrayList<String> (Arrays.asList(
-                        "Analyse", "Describe", "Explain", "Discuss", "Assignment", "Quiz", "Exam", "Essay"))));
+                "Analyse", "Describe", "Explain", "Discuss", "Assignment", "Quiz", "Exam", "Essay")),
+                0));
         categories.add(new Category(
                 "Transport", "The main forms of getting around in Sydney",
                 R.drawable.category_icon2, new ArrayList <String> (Arrays.asList(
-                        "Train","Taxi","Bus","Ferry","Car","Truck","Plane"))));
+                "Train","Taxi","Bus","Ferry","Car","Truck","Plane")),
+                0));
         categories.add(new Category(
                 "Shopping", "Types of shops and important vocabulary",
                 R.drawable.category_icon3, new ArrayList <String> (Arrays.asList(
-                        "Supermarket", "Grocery", "Kiosk", "Restaurant", "Cafe", "Retail", "Convenience store"))));
+                "Supermarket", "Grocery", "Kiosk", "Restaurant", "Cafe", "Retail", "Convenience store")),
+                0));
         categories.add(new Category(
                 "Society", "Australian society vocabulary",
                 R.drawable.category_icon4, new ArrayList <String> (Arrays.asList(
-                        "Compulsory", "Election", "Legislation", "Government", "Subsidy", "Tax", "Rent", "Obligation", "Regulations"))));
+                "Compulsory", "Election", "Legislation", "Government", "Subsidy", "Tax", "Rent", "Obligation", "Regulations")),
+                0));
         categories.add(new Category("Expanding vocabulary: Adjectives", "Challenging adjectives",
                 R.drawable.category_icon5, new ArrayList <String> (Arrays.asList(
-                "Tenacious", "Imperative", "Extraordinary", "Eloquent", "Diligent", "Innate", "Significant", "Controversial"))));
+                "Tenacious", "Imperative", "Extraordinary", "Eloquent", "Diligent", "Innate", "Significant", "Controversial")),
+                0));
         categories.add(new Category("Expanding vocabulary: Verbs", "Challenging verbs",
                 R.drawable.category_icon6, new ArrayList <String> (Arrays.asList(
-                        "Abhor", "Oppose", "Appease", "Quarrel", "Consult", "Resolve", "Discuss", "Regret"))));
+                "Abhor", "Oppose", "Appease", "Quarrel", "Consult", "Resolve", "Discuss", "Regret")),
+                0));
         return categories;
     }
 

@@ -25,20 +25,20 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
+
 public class DictionaryScreenFragment extends Fragment {
     private String TAG = "DictionaryFragment";
     TextInputEditText edit;
     String pronounce;
+    String example;
     String type;
     String definition;
     ImageView image;
     String input;
 
     // Dictionary search page which allows users to search for a word from the api and get a result
-
     public DictionaryScreenFragment() {
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,20 +59,22 @@ public class DictionaryScreenFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 input = String.valueOf(edit.getText());
-                updateUi();
+                if (!input.isEmpty()) {
+                    new GetDefinitionTask().execute();
+                    v.findViewById(R.id.type_word).
+                }
             }
         });
-
-
         return v;
     }
 
     private void updateUi() {
         View v = getView();
-        if (v != null && (input != null || definition != null || pronounce != null || type != null)) {
+        if (v != null && (input != null || definition != null || pronounce != null || example != null || type != null)) {
             ((TextView) v.findViewById(R.id.wordtv)).setText(input);
             ((TextView) v.findViewById(R.id.definitiontv)).setText(definition);
             ((TextView) v.findViewById(R.id.pronouncetv)).setText(pronounce);
+            ((TextView) v.findViewById(R.id.exampletv)).setText(example);
             ((TextView) v.findViewById(R.id.typetv)).setText(type);
         }
     }
@@ -89,13 +91,14 @@ public class DictionaryScreenFragment extends Fragment {
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 DefinitionService service = retrofit.create(DefinitionService.class);
-
-                //NEED TO MODIFY
                 Call<DefinitionResponse> call = service.getDefinitions(input, authToken);
                 Log.d(TAG, "doInBackground: getDefinitions finished");
                 Response<DefinitionResponse> definitionResponse = call.execute();
                 Log.d(TAG, "doInBackground: definitionResponse execute");
                 DefinitionResponse wordDetail = definitionResponse.body();
+                wordDetail.setFirstDefinition(wordDetail.getDefinitions().get(0).getDefinition());
+                wordDetail.setExample(wordDetail.getDefinitions().get(0).getExample());
+                // Currently only calls API once for the first word in the list
                 return wordDetail;
             } catch (IOException e) {
                 Log.d(TAG, "doInBackground: API call failed");
@@ -103,5 +106,20 @@ public class DictionaryScreenFragment extends Fragment {
                 return null;
             }
         }
+
+        @Override
+        protected void onPostExecute(DefinitionResponse word) {
+            // Add to the definitions List in WordListFragment instead so can pass it on to FightScreen
+            Log.d(TAG, "onPostExecute: new DefinitionResponse word is: " + word.getWord() + " with definition " + word.getFirstDefinition());
+            definition = word.getFirstDefinition();
+            pronounce = word.getPronunciation();
+            example = word.getExample();
+            type = word.getDefinitions().get(0).getType();
+            updateUi();
+            edit.clearComposingText();
+            // Can also call for example, and image
+            Log.d(TAG, "onPostExecute: Added new DefinitionResponse");
+        }
     }
 }
+
