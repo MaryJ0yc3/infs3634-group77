@@ -1,6 +1,7 @@
 package com.example.infs3634_group77;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import com.example.infs3634_group77.Helpers.DefinitionService;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -36,8 +39,8 @@ public class DictionaryScreenFragment extends Fragment {
     String example;
     String type;
     String definition;
-    ImageView image;
     String input;
+    String imageUrl;
 
     // Dictionary search page which allows users to search for a word from the api and get a result
     public DictionaryScreenFragment() {
@@ -83,6 +86,19 @@ public class DictionaryScreenFragment extends Fragment {
         return v;
     }
 
+    // Displays image from url
+    public Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "wordImage");
+            Log.d(TAG, "LoadImageFromWebOperations: Found image");
+            return d;
+        } catch (Exception e) {
+            Log.d(TAG, "LoadImageFromWebOperations: No image");
+            return null;
+        }
+    }
+
     private void searchDef(String name) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=" + input));
         startActivity(intent);
@@ -96,6 +112,7 @@ public class DictionaryScreenFragment extends Fragment {
             ((TextView) v.findViewById(R.id.pronouncetv)).setText(pronounce);
             ((TextView) v.findViewById(R.id.exampletv)).setText(example);
             ((TextView) v.findViewById(R.id.typetv)).setText(type);
+            ((ImageView) v.findViewById(R.id.imageView)).setImageDrawable(LoadImageFromWebOperations(imageUrl));
         }
     }
 
@@ -135,6 +152,7 @@ public class DictionaryScreenFragment extends Fragment {
             pronounce = word.getPronunciation();
             example = word.getExample();
             type = word.getDefinitions().get(0).getType();
+            imageUrl = word.getDefinitions().get(0).getImageUrl();
             updateUi();
             edit.clearComposingText();
             // Can also call for example, and image
