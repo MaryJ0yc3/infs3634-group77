@@ -33,8 +33,6 @@ public class HomeScreenFragment extends Fragment {
 
     //has nice visuals in the bg
     //has help button that goes to tutorial
-
-    public static final String EXTRA_MESSAGE = "com.example.infs3634_group77.MESSAGE";
     private static final String TAG = "HomeScreenFragment";
 
     private RecyclerView mRecyclerView;

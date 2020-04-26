@@ -17,10 +17,11 @@
             android:id="@+id/ivCategory"
             android:layout_width="93dp"
             android:layout_height="90dp"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.507"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -28,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
             android:text="Category Name"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintStart_toEndOf="@+id/ivCategory"
@@ -47,7 +49,7 @@
             android:id="@+id/tvScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="44dp"
             android:text="High Score:"
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/ivCategory"
@@ -57,12 +59,12 @@
             android:id="@+id/tvBestScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:text="BestScore"
+            android:layout_marginStart="2dp"
+            android:text="0"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/tvScore"
-            app:layout_constraintStart_toStartOf="@+id/tvScore"
-            app:layout_constraintTop_toBottomOf="@+id/tvScore" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvScore"
+            app:layout_constraintStart_toEndOf="@+id/tvScore" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

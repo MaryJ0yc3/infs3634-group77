@@ -16,6 +16,7 @@ import com.example.infs3634_group77.Entities.DefinitionResponse;
 import com.example.infs3634_group77.R;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.List;
 
 import retrofit2.Call;
@@ -82,7 +83,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.tvBestScore.setText(category.getBestScore());
         holder.ivCategory.setImageResource(category.getIcon());
 
-        if (category.getBestScore() > 0) {
+        if (Double.valueOf(category.getBestScore()) > 0) {
             holder.tvBestScore.setVisibility(View.VISIBLE);
             holder.tvScore.setVisibility(View.VISIBLE);
         }

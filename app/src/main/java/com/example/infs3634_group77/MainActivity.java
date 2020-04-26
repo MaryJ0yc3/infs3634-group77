@@ -81,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
         category = mCategory;
     }
 
-    public int getCategoryScore() {return category.getBestScore();}
+    public String getCategoryScore() {return category.getBestScore();}
 
-    public void setCategoryScore(int score) {
+    public void setCategoryScore(Double score) {
         category.setBestScore(score);
     }
 

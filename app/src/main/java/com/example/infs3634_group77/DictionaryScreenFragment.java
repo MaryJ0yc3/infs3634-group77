@@ -1,5 +1,7 @@
 package com.example.infs3634_group77;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,11 +64,28 @@ public class DictionaryScreenFragment extends Fragment {
                 input = String.valueOf(edit.getText());
                 if (!input.isEmpty()) {
                     new GetDefinitionTask().execute();
-                    v.findViewById(R.id.type_word).
+                    edit.getText().clear();
+                }
+            }
+        });
+
+        ImageButton google = v.findViewById(R.id.googlebtn);
+        google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!input.isEmpty()) {
+                    searchDef(input);
+                } else {
+                    // Error message telling user to input text
                 }
             }
         });
         return v;
+    }
+
+    private void searchDef(String name) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=" + input));
+        startActivity(intent);
     }
 
     private void updateUi() {
