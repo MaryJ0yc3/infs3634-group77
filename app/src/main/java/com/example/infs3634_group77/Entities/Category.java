@@ -56,7 +56,7 @@ public class Category {
         categories.add(new Category(
                 "Transport", "The main forms of getting around in Sydney",
                 R.drawable.category_icon2, new ArrayList <String> (Arrays.asList(
-                        "Train","Taxi","Bus","Ferry","Car","Truck","Plane"))));
+                        "Train","Taxi","Bus","Ferry","Car","Truck","Aeroplane"))));
         categories.add(new Category(
                 "Shopping", "Types of shops and important vocabulary",
                 R.drawable.category_icon3, new ArrayList <String> (Arrays.asList(

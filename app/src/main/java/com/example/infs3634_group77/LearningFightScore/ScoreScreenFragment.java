@@ -23,7 +23,6 @@ public class ScoreScreenFragment extends Fragment {
     //Received bundle arraylists
     private ArrayList<String> correctWords;
     private ArrayList<String> incorrectWords;
-    private ArrayList<String> finalSkipWords;
 
 
     public ScoreScreenFragment() { }
@@ -37,7 +36,6 @@ public class ScoreScreenFragment extends Fragment {
             Bundle bundle = getArguments();
             correctWords = bundle.getStringArrayList("correct words");
             incorrectWords = bundle.getStringArrayList("incorrect words");
-            finalSkipWords = bundle.getStringArrayList("final skip words");
 
         }
     }
@@ -58,9 +56,7 @@ public class ScoreScreenFragment extends Fragment {
         //calculations
         int correctCount = correctWords.size();
         int incorrectCount = incorrectWords.size();
-        int finalSkipCount = finalSkipWords.size();
-        int finalIncorrectCount = incorrectCount + finalSkipCount;
-        int totalQuestionsAttempted = incorrectCount + finalSkipCount +  correctCount;
+        int totalQuestionsAttempted = incorrectCount  + correctCount;
         double scoreDecimal;
         double scorePercentage;
         if(correctCount>0 && totalQuestionsAttempted>0){
@@ -88,18 +84,11 @@ public class ScoreScreenFragment extends Fragment {
                     + mIncorrectWord;
         }
 
-//        for(int i = 0; i < finalSkipWords.size() ; i++){
-//            String mIncorrectWord = finalSkipWords.get(i);
-//            fullIncorrectListFormatted = fullIncorrectListFormatted
-//                    + "\n"
-//                    + mIncorrectWord;
-//        }
-
 
         //setText
         tvscorePercentage.setText("Score: " + scorePercentage + "%");
         tvcorrectCount.setText("Correct: " + String.valueOf(correctCount));
-        tvincorrectCount.setText("Incorrect: " + String.valueOf(finalIncorrectCount));
+        tvincorrectCount.setText("Incorrect: " + String.valueOf(incorrectCount));
         tvcorrectList.setText(fullCorrectListFormatted);
         tvincorrectList.setText(fullIncorrectListFormatted);
 
