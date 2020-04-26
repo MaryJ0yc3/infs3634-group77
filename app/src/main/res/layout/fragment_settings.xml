@@ -12,21 +12,61 @@
     <Button
         android:id="@+id/aboutbtn"
         android:layout_width="200dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="106dp"
-        android:layout_marginBottom="355dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="296dp"
         android:text="@string/acknowledgement"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/seekBar" />
 
     <Spinner
         android:id="@+id/languages"
         android:layout_width="200dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="43dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginBottom="30dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/languages" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="181dp"
+        android:layout_marginBottom="30dp"
+        android:text="Volume"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="186dp"
+        android:layout_marginBottom="30dp"
+        android:text="About"
         app:layout_constraintBottom_toTopOf="@+id/aboutbtn"
-        app:layout_constraintEnd_toEndOf="@+id/aboutbtn" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="175dp"
+        android:layout_marginBottom="30dp"
+        android:text="Language"
+        app:layout_constraintBottom_toTopOf="@+id/languages"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
