@@ -1,7 +1,6 @@
 package com.example.infs3634_group77;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,13 +16,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.infs3634_group77.Entities.DefinitionResponse;
 import com.example.infs3634_group77.Helpers.DefinitionService;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -35,6 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DictionaryScreenFragment extends Fragment {
     private String TAG = "DictionaryFragment";
     TextInputEditText edit;
+    TextView errortv;
     String pronounce;
     String example;
     String type;
@@ -58,8 +57,9 @@ public class DictionaryScreenFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_learning_screen, container, false);
-
+        errortv = v.findViewById(R.id.errortv);
         edit = v.findViewById(R.id.type_word);
+        input = String.valueOf(edit.getText());
         Button search = v.findViewById(R.id.searchbtn);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +68,8 @@ public class DictionaryScreenFragment extends Fragment {
                 if (!input.isEmpty()) {
                     new GetDefinitionTask().execute();
                     edit.getText().clear();
-                }
+                    errortv.setVisibility(View.INVISIBLE);
+                } else { errortv.setVisibility(View.VISIBLE);}
             }
         });
 
@@ -76,27 +77,14 @@ public class DictionaryScreenFragment extends Fragment {
         google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!input.isEmpty()) {
+                if (input != null && !input.isEmpty()) {
                     searchDef(input);
                 } else {
-                    // Error message telling user to input text
+                    errortv.setVisibility(View.VISIBLE);
                 }
             }
         });
         return v;
-    }
-
-    // Displays image from url
-    public Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "wordImage");
-            Log.d(TAG, "LoadImageFromWebOperations: Found image");
-            return d;
-        } catch (Exception e) {
-            Log.d(TAG, "LoadImageFromWebOperations: No image");
-            return null;
-        }
     }
 
     private void searchDef(String name) {
@@ -112,7 +100,9 @@ public class DictionaryScreenFragment extends Fragment {
             ((TextView) v.findViewById(R.id.pronouncetv)).setText(pronounce);
             ((TextView) v.findViewById(R.id.exampletv)).setText(example);
             ((TextView) v.findViewById(R.id.typetv)).setText(type);
-            ((ImageView) v.findViewById(R.id.imageView)).setImageDrawable(LoadImageFromWebOperations(imageUrl));
+            ImageView imageview = ((ImageView) v.findViewById(R.id.imageView));
+
+            Glide.with(this).load(imageUrl).into(imageview);
         }
     }
 

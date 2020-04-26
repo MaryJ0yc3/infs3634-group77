@@ -1,5 +1,6 @@
 package com.example.infs3634_group77.LearningFightScore;
 
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.infs3634_group77.Entities.DefinitionResponse;
 import com.example.infs3634_group77.Helpers.DefinitionService;
 import com.example.infs3634_group77.R;
@@ -27,6 +30,7 @@ public class WordDetailFragment extends Fragment {
     private String word;
     private String definition;
     private String example;
+    private String imageUrl;
 
     public WordDetailFragment() {
     }
@@ -68,6 +72,8 @@ public class WordDetailFragment extends Fragment {
             ((TextView) v.findViewById(R.id.tvWord)).setText(word);
             ((TextView) v.findViewById(R.id.tvDefinition)).setText(definition);
             ((TextView) v.findViewById(R.id.tvExample)).setText(example);
+            ImageView imageview = (ImageView) v.findViewById(R.id.ivDefinition);
+            Glide.with(this).load(imageUrl).into(imageview);
         }
     }
 
@@ -105,6 +111,7 @@ public class WordDetailFragment extends Fragment {
             Log.d(TAG, "onPostExecute: new DefinitionResponse word is: " + word.getWord() + " with definition " + word.getFirstDefinition());
             definition = word.getFirstDefinition();
             example = word.getExample();
+            imageUrl = word.getDefinitions().get(0).getImageUrl();
             updateUi();
             // Can also call for example, and image
             Log.d(TAG, "onPostExecute: Added new DefinitionResponse");

@@ -65,7 +65,7 @@ public class Category {
                 "University", "Key words needed to get by at University",
                 R.drawable.category_icon1, new ArrayList<String> (Arrays.asList(
                 "Analyse", "Describe", "Explain", "Discuss", "Assignment", "Quiz", "Exam", "Essay")),
-                "5"));
+                "0"));
         categories.add(new Category(
                 "Transport", "The main forms of getting around in Sydney",
                 R.drawable.category_icon2, new ArrayList <String> (Arrays.asList(
